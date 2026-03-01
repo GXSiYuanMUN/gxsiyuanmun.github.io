@@ -3,323 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 更新内容：所有“广西思源”已改为“广西·思源”，修复首页显示逻辑 -->
-    <title>广西·思源模拟联合国大会 | SYMUN</title>
+    <title>广西·思源模拟联合国大会 | 测试页</title>
     <style>
-        :root {
-            --primary: #1a2a40;
-            --accent: #2d5a9b;
-            --light: #f7f9fc;
-            --text: #333;
-            --white: #ffffff;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", "Helvetica Neue", sans-serif; }
-        html { scroll-behavior: smooth; }
-        body { background: var(--light); color: var(--text); line-height: 1.8; overflow-x: hidden; }
-        
-        /* 导航栏 */
-        nav {
-            background: rgba(26, 42, 64, 0.95);
-            backdrop-filter: blur(12px);
-            padding: 1rem 2rem;
-            text-align: center;
-            position: sticky; top: 0; z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-        nav a {
-            color: rgba(255,255,255,0.8); margin: 0 1rem; text-decoration: none;
-            font-size: 1rem; font-weight: 500; position: relative; transition: color 0.3s; display: inline-block;
-        }
-        nav a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%;
-            background: #4da6ff; transition: all 0.3s ease; transform: translateX(-50%);
-        }
-        nav a:hover { color: #fff; }
-        nav a:hover::after { width: 100%; }
-
-        /* --- 首页封面 (确保高度为100vh，即全屏) --- */
+        body { margin: 0; font-family: sans-serif; }
+        /* 强制全屏蓝色背景 */
         #home {
-            height: 100vh; /* 强制占满整个屏幕高度 */
-            min-height: 600px; /* 防止小屏幕过矮 */
-            background: linear-gradient(-45deg, #1a2a40, #2d5a9b, #162438, #3a6bb5);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            background-color: #1a2a40; /* 纯蓝色保底 */
+            background-image: linear-gradient(135deg, #1a2a40, #2d5a9b);
             color: white;
+            height: 100vh; /* 占满全屏 */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 2rem;
-            position: relative;
-            width: 100%;
+            padding: 20px;
         }
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        h1 { font-size: 40px; margin-bottom: 10px; }
+        p { font-size: 20px; opacity: 0.9; }
+        .btn {
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: white;
+            color: #1a2a40;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
         }
-        .circle {
-            position: absolute; border-radius: 50%; background: rgba(255,255,255,0.05);
-            animation: float 6s infinite ease-in-out; pointer-events: none;
-        }
-        .c1 { width: 300px; height: 300px; top: -50px; left: -50px; }
-        .c2 { width: 400px; height: 400px; bottom: -100px; right: -100px; animation-delay: 2s; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-        #home h1 {
-            font-size: 3.5rem; margin-bottom: 1rem; letter-spacing: 3px;
-            animation: fadeInUp 1s ease-out 0.5s backwards;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            line-height: 1.2;
-        }
-        #home p.subtitle {
-            font-size: 1.6rem; animation: fadeInUp 1s ease-out 0.8s backwards;
-            font-weight: 300; letter-spacing: 1px;
-        }
-        #home .tagline {
-            margin-top: 2rem; font-size: 1.2rem; background: rgba(255,255,255,0.15);
-            padding: 0.8rem 2rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-            backdrop-filter: blur(5px); animation: fadeInUp 1s ease-out 1.1s backwards;
-            max-width: 800px; line-height: 1.6;
-        }
-        #home .scroll-hint {
-            position: absolute; bottom: 40px; font-size: 0.9rem; opacity: 0.7;
-            animation: bounce 2s infinite; cursor: pointer;
-        }
-
-        /* 内容区 */
-        .container { max-width: 900px; margin: 0 auto; padding: 4rem 1.5rem; }
-        section {
-            background: var(--white); padding: 3rem 2.5rem; margin-bottom: 4rem;
-            border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-            opacity: 0; transform: translateY(50px); transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-        section.visible { opacity: 1; transform: translateY(0); }
-        section h2 {
-            color: var(--primary); margin-bottom: 2rem; font-size: 2rem;
-            border-left: 6px solid var(--accent); padding-left: 1.2rem;
-        }
-
-        /* 交互式历届回顾样式 */
-        .conference-item { margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
-        .conference-item:last-child { border-bottom: none; }
-        
-        .conf-title {
-            font-size: 1.6rem; color: var(--primary); cursor: pointer;
-            position: relative; display: inline-block; margin-bottom: 0.5rem;
-            transition: color 0.3s;
-        }
-        .conf-title::after {
-            content: ''; position: absolute; left: 0; bottom: -5px;
-            width: 0; height: 3px; background: var(--accent);
-            transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            border-radius: 2px;
-        }
-        .conf-title:hover { color: var(--accent); }
-        .conf-title:hover::after { width: 100%; }
-        
-        .conf-meta { color: #666; font-size: 0.9rem; margin-bottom: 1rem; display: block; }
-        
-        .toggle-btn {
-            display: inline-block; margin-top: 0.5rem; font-size: 0.9rem;
-            color: var(--accent); cursor: pointer; border: 1px solid var(--accent);
-            padding: 0.3rem 1rem; border-radius: 20px; transition: all 0.3s;
-        }
-        .toggle-btn:hover { background: var(--accent); color: white; }
-
-        .gallery-container {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-            opacity: 0; margin-top: 0;
-        }
-        .gallery-container.open {
-            max-height: 2000px; opacity: 1; margin-top: 1.5rem;
-        }
-
-        .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        .gallery-img {
-            width: 100%; height: 150px; object-fit: cover;
-            border-radius: 8px; cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            background: #eee;
-        }
-        .gallery-img:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-
-        ul, ol { margin-left: 1.5rem; margin-top: 1rem; }
-        li { margin-bottom: 0.8rem; }
-        .highlight {
-            background: linear-gradient(135deg, #eef4ff 0%, #f0f7ff 100%);
-            padding: 1.5rem; border-radius: 12px; color: #2d5a9b;
-            border-left: 5px solid var(--accent); margin: 1.5rem 0;
-        }
-        .contact-card { background: #fff8e1; color: #856404; border-left-color: #ffc107; }
-        
-        footer { text-align: center; padding: 4rem 2rem; background: var(--primary); color: rgba(255,255,255,0.7); margin-top: 4rem; }
-
-        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-
-        @media (max-width: 768px) {
-            #home h1 { font-size: 2.2rem; }
-            #home p.subtitle { font-size: 1.2rem; }
-            nav { padding: 0.8rem; overflow-x: auto; white-space: nowrap; }
-            nav a { margin: 0 0.5rem; font-size: 0.9rem; }
-            .container { padding: 2rem 1rem; }
-            section { padding: 2rem 1.5rem; }
-            .gallery-grid { grid-template-columns: 1fr 1fr; }
+        .content {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            color: #333;
+            border-radius: 10px;
         }
     </style>
 </head>
 <body>
 
-<nav>
-    <a href="#home">首页</a>
-    <a href="#about">关于我们</a>
-    <a href="#history">历届会议</a>
-    <a href="#academic">学术体系</a>
-    <a href="#apply">报名指南</a>
-    <a href="#contact">联系我们</a>
-</nav>
-
-<!-- 首页封面：确保这里的内容是全屏显示的 -->
-<section id="home">
-    <div class="circle c1"></div>
-    <div class="circle c2"></div>
-    <!-- 修改点：广西·思源 -->
+<!-- 首页封面 -->
+<div id="home">
     <h1>广西·思源模拟联合国大会</h1>
-    <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
-    <div class="tagline">学术本位 · 立足广西 · 胸怀世界<br>办惠及最广大学子的学术模联</div>
-    <div class="scroll-hint" onclick="document.getElementById('about').scrollIntoView()">向下滚动探索更多 ↓</div>
-</section>
-
-<div class="container">
-
-    <section id="about" class="animate-on-scroll">
-        <h2>关于我们</h2>
-        <!-- 修改点：广西·思源 -->
-        <p>广西·思源模拟联合国大会（SYMUN），是由现已毕业的<strong>柳州铁一中学模拟联合国社团</strong>优秀成员创立，并由<strong>共青团柳州铁一中学委员会</strong>指导的模拟联合国会议平台。</p>
-        <br>
-        <p>自首次办会以来，广西·思源模联已成功举办多届，已成为广西地区学术水平上乘、声誉良好的模联品牌。我们秉持<strong>“学术本位”</strong>的核心理念，致力于将北京大学全国中学生模拟联合国大会、北京国际模拟联合国大会等顶级大会的学术理念带回广西，为八桂学子搭建家门口的优质会议平台。</p>
-        <br>
-        <div class="highlight">
-            <strong>我们的承诺：</strong><br>
-            “欲流之远者，必浚其泉源”。广西·思源从未忘记其学术本位的初心，我们将会议的学术设计视为生命。在办会之余，我们还主持了<strong>《火种计划》</strong>，追求学术的步伐永不停歇。
-        </div>
-        <br>
-        <p>我们积极响应“解放思想、创新求变，向海图强、开放发展”的号召，致力于培养具有完备政治素质和全球视野的现代公民，托举八桂青年走进国际组织、近距离参与全球治理的梦想。</p>
-    </section>
-
-    <!-- 历届会议 (交互版) -->
-    <section id="history" class="animate-on-scroll">
-        <h2>历届会议回顾</h2>
-        <p style="margin-bottom: 2rem; color: #666;">点击标题或“查看精彩瞬间”按钮，回顾往昔高光时刻。</p>
-
-        <!-- 第四届 -->
-        <div class="conference-item">
-            <h3 class="conf-title" onclick="toggleGallery('gallery-4th')">第四届广西·思源模联 · 2025</h3>
-            <span class="conf-meta">2025年8月1日-3日 | 广西柳州 | 主题：重温联合国创始初心</span>
-            <p>本届大会首次实现区外学团招募全流程标准化运行，设有旧金山会议、INCB、GA 及 MPC 等多个会场。</p>
-            <span class="toggle-btn" onclick="toggleGallery('gallery-4th')">✨ 查看精彩瞬间</span>
-            
-            <div id="gallery-4th" class="gallery-container">
-                <div class="gallery-grid">
-                    <!-- 占位图，请替换为你的真实图片文件名 -->
-                    <img src="https://via.placeholder.com/400x300/2d5a9b/ffffff?text=SYMUN+2025+Opening" class="gallery-img" alt="开幕式">
-                    <img src="https://via.placeholder.com/400x300/1a2a40/ffffff?text=Committee+Session" class="gallery-img" alt="会场辩论">
-                    <img src="https://via.placeholder.com/400x300/3a6bb5/ffffff?text=Social+Event" class="gallery-img" alt="社交晚宴">
-                    <img src="https://via.placeholder.com/400x300/5577aa/ffffff?text=Award+Ceremony" class="gallery-img" alt="颁奖典礼">
-                </div>
-            </div>
-        </div>
-
-        <!-- 第三届 -->
-        <div class="conference-item">
-            <h3 class="conf-title" onclick="toggleGallery('gallery-3rd')">第三届广西·思源模联 · 2025 (寒假)</h3>
-            <span class="conf-meta">2025年1月 | 开创首个历史会场</span>
-            <p>开创广西·思源史上第一个历史会场，首次实现双会场平稳运行，本土历史会场成为又一张耀眼名片。</p>
-            <span class="toggle-btn" onclick="toggleGallery('gallery-3rd')">✨ 查看精彩瞬间</span>
-            
-            <div id="gallery-3rd" class="gallery-container">
-                <div class="gallery-grid">
-                    <img src="https://via.placeholder.com/400x300/2d5a9b/ffffff?text=SYMUN+2025+Winter+1" class="gallery-img" alt="冬季会议1">
-                    <img src="https://via.placeholder.com/400x300/1a2a40/ffffff?text=SYMUN+2025+Winter+2" class="gallery-img" alt="冬季会议2">
-                    <img src="https://via.placeholder.com/400x300/3a6bb5/ffffff?text=SYMUN+2025+Winter+3" class="gallery-img" alt="冬季会议3">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="academic" class="animate-on-scroll">
-        <h2>学术体系</h2>
-        <p>广西·思源模联坚持“学术本位”，提供从基础规则到危机应对的全方位培训。</p>
-        <div class="highlight">我们为新人代表提供完整的学术指导与《火种计划》资源。</div>
-    </section>
-
-    <section id="apply" class="animate-on-scroll">
-        <h2>报名指南</h2>
-        <ol style="line-height: 2;">
-            <li>关注官方通知 (公众号/社群)。</li>
-            <li>填写在线报名表单。</li>
-            <li>缴纳会议费用并入群。</li>
-        </ol>
-    </section>
-
-    <section id="contact" class="animate-on-scroll">
-        <h2>联系我们</h2>
-        <ul>
-            <li>📱 <strong>公众号</strong>：SY 思源模联</li>
-            <li>💬 <strong>官方 QQ 社群</strong>：131055043</li>
-            <li>📧 <strong>邮箱</strong>：siyuanmolian@126.com</li>
-        </ul>
-        <br>
-        <div class="highlight contact-card">
-            <strong>🤝 外联合作咨询</strong><br>
-            联系人：外联总监 吴斯绮<br>
-            QQ：3422795422 | WeChat：Wsq13132821735
-        </div>
-    </section>
-
+    <p>GUANGXI SIYUAN MODEL UNITED NATIONS</p>
+    <p style="font-size: 16px; margin-top: 10px;">学术本位 · 立足广西 · 胸怀世界</p>
+    <a href="#about" class="btn">向下滚动</a>
 </div>
 
-<footer>
-    <!-- 修改点：广西·思源 -->
-    <p>广西·思源模拟联合国大会 &copy; 2024–2026</p>
-    <p style="margin-top:0.5rem; opacity: 0.7;">Powered by GitHub Pages | 学术本位 · 愿启未来</p>
-</footer>
-
-<script>
-    // 滚动入场动画
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.animate-on-scroll').forEach(sec => observer.observe(sec));
-
-    // 画廊切换逻辑
-    function toggleGallery(id) {
-        const gallery = document.getElementById(id);
-        const isOpen = gallery.classList.contains('open');
-        
-        // 关闭其他所有打开的画廊（手风琴效果）
-        document.querySelectorAll('.gallery-container').forEach(g => {
-            if (g.id !== id) g.classList.remove('open');
-        });
-
-        if (isOpen) {
-            gallery.classList.remove('open');
-        } else {
-            gallery.classList.add('open');
-        }
-    }
-</script>
+<!-- 内容区域 -->
+<div class="content" id="about">
+    <h2>关于我们</h2>
+    <p>如果你能看到这段文字，说明网站代码已经成功更新！之前的白屏问题已解决。</p>
+    <p>广西·思源模拟联合国大会（SYMUN）是由柳州铁一中学模拟联合国社团优秀成员创立的会议平台。</p>
+</div>
 
 </body>
 </html>
