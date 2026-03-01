@@ -6,16 +6,16 @@
     <title>广西·思源模拟联合国大会 | SYMUN</title>
     <style>
         :root {
-            --primary: #1a2a40;
-            --accent: #2d5a9b;
-            --bg: #f0f2f5;
+            --primary: #1a2a40; /* 深蓝 */
+            --accent: #2d5a9b;  /* 亮蓝 */
+            --bg: #f0f2f5;      /* 浅灰背景 */
             --text: #333;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
         html { scroll-behavior: smooth; }
         
         body {
-            background-color: var(--bg);
+            background-color: var(--bg); /* 整个页面浅灰，确保不白屏 */
             color: var(--text);
             line-height: 1.6;
         }
@@ -39,29 +39,35 @@
         }
         nav a:hover { text-decoration: underline; }
 
-        /* 首页：实体卡片风格 (确保显色) */
+        /* --- 核心修改：英雄卡片式首页 --- */
         #home {
+            /* 不再使用 100vh，改用最小高度 + 上下大间距 */
             min-height: 80vh; 
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 4rem 1.5rem;
-            background-color: var(--bg);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); /* 修正：将渐变背景移到这里 */
+            color: white;
         }
 
         .hero-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            /* 这是一个实体的蓝色卡片，绝对能显示颜色！ */
+            background: rgba(0, 0, 0, 0.2);
             color: white;
             width: 100%;
             max-width: 800px;
             padding: 4rem 2rem;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(26, 42, 64, 0.3);
+            box-shadow: 0 20px 50px rgba(26, 42, 64, 0.3); /* 大阴影增加立体感 */
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
+        /* 装饰光晕 */
         .hero-card::before {
             content: '';
             position: absolute;
@@ -188,7 +194,7 @@
 </nav>
 
 <!-- 首页：实体卡片风格 -->
-<section id="home">
+<div id="home" class="animate-on-scroll">
     <div class="hero-card">
         <h1>广西·思源模拟联合国大会</h1>
         <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
@@ -200,7 +206,7 @@
             向下滚动探索更多 ↓
         </div>
     </div>
-</section>
+</div>
 
 <div class="container">
 
@@ -218,36 +224,29 @@
         <h2>历届会议回顾</h2>
         <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">点击标题查看精彩瞬间</p>
 
-        <!-- 第四届：已修正为 CND -->
         <div class="conference-item" style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 2rem;">
             <h3 class="conf-title" onclick="toggleGallery('g4')">第四届广西·思源模联 · 2025</h3>
-            <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年8月 | 柳州 | 主题：重温联合国创始初心</span>
-            <p>首次实现区外学团招募标准化。设有旧金山会议、<strong>CND (麻委会)</strong>、联大及主新闻中心等会场。</p>
-            <ul style="font-size: 0.9rem; color: #555; margin-top: 0.5rem;">
-                <li>🏛️ <strong>历史会场</strong>：1945 年旧金山会议</li>
-                <li>💊 <strong>CND (麻委会)</strong>：聚焦全球毒品治理政策</li>
-                <li>🌍 <strong>联大 (GA)</strong>：聚焦安理会改革</li>
-            </ul>
-            <span class="toggle-btn" onclick="toggleGallery('g4')" style="margin-top:1rem;">✨ 查看图片</span>
+            <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年8月 | 柳州</span>
+            <p>首次实现区外学团招募标准化，设有旧金山会议、INCB、GA 等会场。</p>
+            <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看图片</span>
             <div id="g4" class="gallery-container">
                 <div class="gallery-grid">
-                    <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=Opening" class="gallery-img" alt="开幕式">
-                    <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=CND+Session" class="gallery-img" alt="麻委会现场">
-                    <img src="https://via.placeholder.com/400x300/3a6bb5/fff?text=Award" class="gallery-img" alt="颁奖典礼">
+                    <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=Opening" class="gallery-img">
+                    <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=Debate" class="gallery-img">
+                    <img src="https://via.placeholder.com/400x300/3a6bb5/fff?text=Award" class="gallery-img">
                 </div>
             </div>
         </div>
 
-        <!-- 第三届 -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleGallery('g3')">第三届广西·思源模联 · 2025 (寒假)</h3>
             <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年1月</span>
-            <p>开创首个历史会场，双会场平稳运行，本土历史会场成为名片。</p>
-            <span class="toggle-btn" onclick="toggleGallery('g3')" style="margin-top:1rem;">✨ 查看图片</span>
+            <p>开创首个历史会场，双会场平稳运行。</p>
+            <span class="toggle-btn" onclick="toggleGallery('g3')">✨ 查看图片</span>
             <div id="g3" class="gallery-container">
                 <div class="gallery-grid">
-                    <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=Winter+1" class="gallery-img" alt="冬季会议1">
-                    <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=Winter+2" class="gallery-img" alt="冬季会议2">
+                    <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=Winter+1" class="gallery-img">
+                    <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=Winter+2" class="gallery-img">
                 </div>
             </div>
         </div>
