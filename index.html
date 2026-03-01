@@ -12,7 +12,7 @@
             font-family: "Microsoft YaHei", "Helvetica Neue", sans-serif;
         }
         html {
-            scroll-behavior: smooth; /* 关键：平滑滚动 */
+            scroll-behavior: smooth;
         }
         body {
             background: #f7f9fc;
@@ -43,9 +43,9 @@
             color: #4da6ff;
         }
 
-        /* 全屏封面首页 (Hero Section) */
+        /* 全屏封面首页 */
         #home {
-            height: 100vh; /* 占满整个屏幕高度 */
+            height: 100vh;
             background: linear-gradient(135deg, #1a2a40 0%, #2d5a9b 100%);
             color: white;
             display: flex;
@@ -74,6 +74,8 @@
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             animation: fadeInUp 1s ease-out 0.8s backwards;
+            max-width: 800px;
+            line-height: 1.6;
         }
         #home .scroll-hint {
             position: absolute;
@@ -87,7 +89,7 @@
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 4rem 1rem; /* 增加上下间距，制造“翻页”感 */
+            padding: 4rem 1rem;
         }
         section {
             background: white;
@@ -107,12 +109,20 @@
             border-left: 5px solid #2d5a9b;
             padding-left: 1rem;
         }
-        ul {
+        ul, ol {
             margin-left: 1.5rem;
             margin-top: 1rem;
         }
         li {
             margin-bottom: 0.5rem;
+        }
+        .highlight {
+            background: #eef4ff;
+            padding: 1rem;
+            border-radius: 6px;
+            color: #2d5a9b;
+            border-left: 4px solid #2d5a9b;
+            margin: 1rem 0;
         }
 
         footer {
@@ -145,6 +155,7 @@
             #home p.subtitle { font-size: 1.2rem; }
             nav a { display: block; margin: 0.5rem 0; }
             .container { padding: 2rem 1rem; }
+            section { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -163,7 +174,7 @@
 <section id="home">
     <h1>广西思源模拟联合国大会</h1>
     <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
-    <div class="tagline">立足广西 · 面向青年 · 胸怀世界</div>
+    <div class="tagline">学术本位 · 立足广西 · 胸怀世界<br>办惠及最广大学子的学术模联</div>
     <div class="scroll-hint">向下滚动探索更多 ↓</div>
 </section>
 
@@ -172,88 +183,101 @@
     <!-- 关于我们 -->
     <section id="about">
         <h2>关于我们</h2>
-        <p>广西思源模拟联合国大会（SYMUN），是由广西青年自主发起、组织与运营的模拟联合国会议品牌。</p>
+        <p>广西·思源模拟联合国大会（SYMUN），是由现已毕业的<strong>柳州铁一中学模拟联合国社团</strong>优秀成员创立，并由<strong>共青团柳州铁一中学委员会</strong>指导的模拟联合国会议平台。</p>
         <br>
-        <p>我们始终坚持：</p>
-        <ul>
-            <li><strong>以学术为核心</strong>：严谨的规则，深度的议题。</li>
-            <li><strong>以青年为主体</strong>：由青年领导，为青年服务。</li>
-            <li><strong>以成长为目标</strong>：在思辨中看见更大的世界。</li>
-        </ul>
+        <p>自首次办会以来，思源模联已成功举办多届，已成为广西地区学术水平上乘、声誉良好的模联品牌。我们秉持<strong>“学术本位”</strong>的核心理念，致力于将北京大学全国中学生模拟联合国大会、北京国际模拟联合国大会等顶级大会的学术理念带回广西，为八桂学子搭建家门口的优质会议平台。</p>
         <br>
-        <p>我们希望通过模拟联合国，让更多广西青年了解国际事务、锻炼演讲与辩论能力、提升逻辑思维与合作意识。</p>
+        <div class="highlight">
+            <strong>我们的承诺：</strong><br>
+            “欲流之远者，必浚其泉源”。思源从未忘记其学术本位的初心，我们将会议的学术设计视为生命。在办会之余，我们还主持了<strong>《火种计划》</strong>，追求学术的步伐永不停歇。
+        </div>
+        <br>
+        <p>我们积极响应“解放思想、创新求变，向海图强、开放发展”的号召，致力于培养具有完备政治素质和全球视野的现代公民，托举八桂青年走进国际组织、近距离参与全球治理的梦想。</p>
     </section>
 
     <!-- 历届会议 -->
     <section id="history">
         <h2>历届会议回顾</h2>
+        
         <p><strong>第四届思源模联 · 2025</strong></p>
+        <p style="margin-bottom: 0.5rem; color: #666;">2025年8月1日-3日 | 广西柳州</p>
+        <p>本届大会以“重温联合国创始初心，构建共商共建共享体系”为主题，纪念联合国成立八十周年。大会首次实现区外学团招募全流程标准化运行，标志着思源迈出了“省际化”的关键一步。</p>
         <ul>
-            <li>📅 时间：2025年8月</li>
-            <li>📍 地点：广西柳州</li>
-            <li>🌟 特色：历史特殊委员会 · 1945年旧金山会议</li>
-            <li>👥 规模：多所中学代表参与</li>
+            <li>🏛️ <strong>历史会场</strong>：“群策同辉——1945年旧金山会议”，引入中国最高学府模联会议软件与先进经验。</li>
+            <li>💊 <strong>联合国麻醉品委员会 (INCB)</strong>：聚焦全球毒品治理，联合国框架下的发展委首次落地思源。</li>
+            <li>🌍 <strong>联合国大会 (GA)</strong>：聚焦安理会改革，实践前沿文件类型。</li>
+            <li>📰 <strong>主新闻中心 (MPC)</strong>：全程记录精彩瞬间，见证思想交锋。</li>
         </ul>
         <br>
-        <p><strong>第五届思源模联 · 2026（筹备中）</strong></p>
+        <hr style="border:0; border-top:1px solid #eee; margin: 1.5rem 0;">
+        
+        <p><strong>第三届思源模联 · 2025 (寒假)</strong></p>
+        <p style="margin-bottom: 0.5rem; color: #666;">2025年1月</p>
         <ul>
-            <li>🔥 全新主题会场</li>
-            <li>🎓 经验丰富主席团阵容</li>
-            <li>🌏 面向广西及全国中学生、青年代表</li>
+            <li>✨ 开创思源史上第一个<strong>历史会场</strong>。</li>
+            <li>✅ 首次实现除主新闻中心外的<strong>双会场</strong>平稳运行。</li>
+            <li>🎯 本土历史会场成为思源模联的又一张耀眼名片。</li>
         </ul>
     </section>
 
     <!-- 学术体系 -->
     <section id="academic">
         <h2>学术体系与规则</h2>
-        <p>思源模联采用国内通用、适合中学生与青年的规则体系，兼顾专业性与易懂性：</p>
+        <p>思源模联坚持“学术本位”，采用国内通用且兼具专业性与易懂性的规则体系：</p>
         <ul>
-            <li>✅ 模拟联合国基础规则 (RONA)</li>
-            <li>✅ 发言、动议、表决流程</li>
-            <li>✅ 立场文件与决议稿写作指导</li>
-            <li>✅ 历史危机与特殊委员会规则</li>
+            <li>✅ <strong>基础规则</strong>：严格遵循模拟联合国基础议事规则 (RONA)。</li>
+            <li>✅ <strong>流程规范</strong>：标准化的发言、动议、表决流程。</li>
+            <li>✅ <strong>文件写作</strong>：提供专业的立场文件、工作文件及决议稿写作指导。</li>
+            <li>✅ <strong>特色会场</strong>：拥有成熟的历史危机委员会 (HCC) 及特殊委员会规则体系。</li>
         </ul>
         <br>
-        <p>我们为新人代表提供完整学术指导与培训资料，帮助快速上手。</p>
+        <div class="highlight">
+            我们为新人代表提供完整的学术指导与培训资料（含《火种计划》相关资源），帮助快速上手，确保每一位代表都能获得一流的学术体验。
+        </div>
     </section>
 
     <!-- 报名指南 -->
     <section id="apply">
         <h2>报名指南</h2>
         <p><strong>参会对象</strong></p>
-        <p>中学生、高中生及青年模联爱好者</p>
+        <p>面向全国中学生、高中生及青年模联爱好者开放。</p>
         <br>
         <p><strong>报名流程</strong></p>
-        <ol style="margin-left: 1.5rem; line-height: 2;">
-            <li>关注官方通知 (公众号/社群)</li>
-            <li>填写在线报名表单</li>
-            <li>缴纳会议费用</li>
-            <li>进入代表群，接收学术资料</li>
-            <li>按时参会</li>
+        <ol style="line-height: 2;">
+            <li>关注官方通知 (公众号/社群)。</li>
+            <li>填写在线报名表单。</li>
+            <li>缴纳会议费用。</li>
+            <li>进入代表群，接收学术背景文件与培训资料。</li>
+            <li>按时参会，共赴思辨盛宴。</li>
         </ol>
         <br>
-        <p style="background: #eef4ff; padding: 1rem; border-radius: 6px; color: #2d5a9b;">
-            💡 <strong>提示</strong>：具体报名链接将在官方渠道发布，请留意最新通知。
-        </p>
+        <p style="color: #666; font-size: 0.9rem;">💡 具体报名链接及会议手册将在官方渠道发布，请留意最新通知。</p>
     </section>
 
     <!-- 联系我们 -->
     <section id="contact">
         <h2>联系我们</h2>
         <p>欢迎学校、社团、机构与个人交流合作！</p>
+        <br>
         <ul>
-            <li>📱 公众号：SY思源模联</li>
-            <li>💬 官方QQ社群：131055043</li>
-            <li>🤝 外联咨询：3422795422</li>
-            <li>📧 邮箱：siyuanmolian@126.com</li>
+            <li>📱 <strong>公众号</strong>：SY思源模联</li>
+            <li>💬 <strong>官方QQ社群</strong>：131055043</li>
+            <li>📧 <strong>邮箱</strong>：siyuanmolian@126.com</li>
         </ul>
+        <br>
+        <div class="highlight" style="background: #fff8e1; color: #856404; border-left-color: #ffc107;">
+            <strong>🤝 外联合作咨询</strong><br>
+            联系人：外联总监 吴斯绮<br>
+            QQ：3422795422<br>
+            WeChat：Wsq13132821735
+        </div>
     </section>
 
 </div>
 
 <footer>
-    <p>广西·思源模拟联合国大会 &copy; 2025–2026</p>
-    <p style="margin-top:0.5rem; opacity: 0.7;">Powered by GitHub Pages</p>
+    <p>广西思源模拟联合国大会 &copy; 2024–2026</p>
+    <p style="margin-top:0.5rem; opacity: 0.7;">Powered by GitHub Pages | 学术本位 · 愿启未来</p>
 </footer>
 
 </body>
