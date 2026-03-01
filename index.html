@@ -3,82 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>广西·思源模联 | SYMUN</title>
+    <title>广西思源模拟联合国大会 | SYMUN</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Microsoft YaHei", sans-serif;
+            font-family: "Microsoft YaHei", "Helvetica Neue", sans-serif;
+        }
+        html {
+            scroll-behavior: smooth; /* 关键：平滑滚动 */
         }
         body {
             background: #f7f9fc;
             color: #333;
-            line-height: 1.7;
+            line-height: 1.8;
         }
-        header {
-            background: #1a2a40;
-            color: white;
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-        header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
+        
+        /* 导航栏固定顶部 */
         nav {
-            background: #243857;
-            padding: 0.8rem;
+            background: rgba(26, 42, 64, 0.95);
+            padding: 1rem;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         nav a {
             color: white;
-            margin: 0 0.6rem;
+            margin: 0 0.8rem;
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s;
         }
+        nav a:hover {
+            color: #4da6ff;
+        }
+
+        /* 全屏封面首页 (Hero Section) */
+        #home {
+            height: 100vh; /* 占满整个屏幕高度 */
+            background: linear-gradient(135deg, #1a2a40 0%, #2d5a9b 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+        #home h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            animation: fadeInDown 1s ease-out;
+        }
+        #home p.subtitle {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+        #home .tagline {
+            font-size: 1.1rem;
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            animation: fadeInUp 1s ease-out 0.8s backwards;
+        }
+        #home .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+        }
+
+        /* 内容区域通用样式 */
         .container {
             max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 4rem 1rem; /* 增加上下间距，制造“翻页”感 */
         }
         section {
             background: white;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        section:hover {
+            transform: translateY(-5px);
         }
         section h2 {
             color: #1a2a40;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-            border-left: 4px solid #2d5a9b;
-            padding-left: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-left: 5px solid #2d5a9b;
+            padding-left: 1rem;
         }
         ul {
-            margin-left: 1.2rem;
+            margin-left: 1.5rem;
+            margin-top: 1rem;
         }
+        li {
+            margin-bottom: 0.5rem;
+        }
+
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             background: #1a2a40;
             color: white;
             font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+
+        /* 动画定义 */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 600px) {
+            #home h1 { font-size: 2rem; }
+            #home p.subtitle { font-size: 1.2rem; }
+            nav a { display: block; margin: 0.5rem 0; }
+            .container { padding: 2rem 1rem; }
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>广西·思源模联</h1>
-    <p>GUANGXI SIYUAN MODEL UNITED NATIONS · SYMUN</p>
-    <p style="margin-top:0.5rem;">立足广西 · 面向青年 · 胸怀世界</p>
-</header>
 
 <nav>
     <a href="#home">首页</a>
@@ -89,15 +159,15 @@
     <a href="#contact">联系我们</a>
 </nav>
 
-<div class="container">
+<!-- 全屏封面首页 -->
+<section id="home">
+    <h1>广西思源模拟联合国大会</h1>
+    <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
+    <div class="tagline">立足广西 · 面向青年 · 胸怀世界</div>
+    <div class="scroll-hint">向下滚动探索更多 ↓</div>
+</section>
 
-    <!-- 首页 -->
-    <section id="home">
-        <h2>首页</h2>
-        <p>思源模联是广西地区专注于中学生与青年群体的模拟联合国会议，致力于通过学术交流、国际视野培养与思辨能力训练，为广大青年提供一个理性发声、拓展格局、锻炼自我的平台。</p>
-        <br>
-        <p>我们坚持专业、严谨、开放、包容的会议理念，让每一位参与者都能在模联中收获成长与友谊。</p>
-    </section>
+<div class="container">
 
     <!-- 关于我们 -->
     <section id="about">
@@ -106,9 +176,9 @@
         <br>
         <p>我们始终坚持：</p>
         <ul>
-            <li>以学术为核心</li>
-            <li>以青年为主体</li>
-            <li>以成长为目标</li>
+            <li><strong>以学术为核心</strong>：严谨的规则，深度的议题。</li>
+            <li><strong>以青年为主体</strong>：由青年领导，为青年服务。</li>
+            <li><strong>以成长为目标</strong>：在思辨中看见更大的世界。</li>
         </ul>
         <br>
         <p>我们希望通过模拟联合国，让更多广西青年了解国际事务、锻炼演讲与辩论能力、提升逻辑思维与合作意识。</p>
@@ -119,17 +189,17 @@
         <h2>历届会议回顾</h2>
         <p><strong>第四届思源模联 · 2025</strong></p>
         <ul>
-            <li>时间：2025年8月</li>
-            <li>地点：广西柳州</li>
-            <li>特色：历史特殊委员会 · 万隆会议主题</li>
-            <li>规模：多所中学代表参与</li>
+            <li>📅 时间：2025年8月</li>
+            <li>📍 地点：广西柳州</li>
+            <li>🌟 特色：历史特殊委员会 · 1945年旧金山会议</li>
+            <li>👥 规模：多所中学代表参与</li>
         </ul>
         <br>
-        <p><strong>第五届 广西·思源模拟联合国大会</strong></p>
+        <p><strong>第五届思源模联 · 2026（筹备中）</strong></p>
         <ul>
-            <li>全新主题会场</li>
-            <li>经验丰富主席团阵容</li>
-            <li>面向广西及全国中学生、青年代表</li>
+            <li>🔥 全新主题会场</li>
+            <li>🎓 经验丰富主席团阵容</li>
+            <li>🌏 面向广西及全国中学生、青年代表</li>
         </ul>
     </section>
 
@@ -138,13 +208,13 @@
         <h2>学术体系与规则</h2>
         <p>思源模联采用国内通用、适合中学生与青年的规则体系，兼顾专业性与易懂性：</p>
         <ul>
-            <li>模拟联合国基础规则</li>
-            <li>发言、动议、表决流程</li>
-            <li>立场文件与决议稿写作</li>
-            <li>历史危机与特殊委员会规则</li>
+            <li>✅ 模拟联合国基础规则 (RONA)</li>
+            <li>✅ 发言、动议、表决流程</li>
+            <li>✅ 立场文件与决议稿写作指导</li>
+            <li>✅ 历史危机与特殊委员会规则</li>
         </ul>
         <br>
-      
+        <p>我们为新人代表提供完整学术指导与培训资料，帮助快速上手。</p>
     </section>
 
     <!-- 报名指南 -->
@@ -154,13 +224,17 @@
         <p>中学生、高中生及青年模联爱好者</p>
         <br>
         <p><strong>报名流程</strong></p>
-        <ul>
-            <li>关注官方通知</li>
-            <li>填写报名表单</li>
+        <ol style="margin-left: 1.5rem; line-height: 2;">
+            <li>关注官方通知 (公众号/社群)</li>
+            <li>填写在线报名表单</li>
             <li>缴纳会议费用</li>
             <li>进入代表群，接收学术资料</li>
             <li>按时参会</li>
-        </ul>
+        </ol>
+        <br>
+        <p style="background: #eef4ff; padding: 1rem; border-radius: 6px; color: #2d5a9b;">
+            💡 <strong>提示</strong>：具体报名链接将在官方渠道发布，请留意最新通知。
+        </p>
     </section>
 
     <!-- 联系我们 -->
@@ -168,18 +242,18 @@
         <h2>联系我们</h2>
         <p>欢迎学校、社团、机构与个人交流合作！</p>
         <ul>
-            <li>公众号：SY思源模联</li>
-            <li>官方QQ社群：131055043</li>
-            <li>外联咨询：3422795422</li>
-            <li>邮箱：siyuanmolian@126.com</li>
+            <li>📱 公众号：SY思源模联</li>
+            <li>💬 官方QQ社群：131055043</li>
+            <li>🤝 外联咨询：3422795422</li>
+            <li>📧 邮箱：siyuanmolian@126.com</li>
         </ul>
     </section>
 
 </div>
 
 <footer>
-    广西·思源模拟联合国大会 &copy; 2025–2026<br>
-    本官网由 GitHub Pages 技术支持
+    <p>广西·思源模拟联合国大会 &copy; 2025–2026</p>
+    <p style="margin-top:0.5rem; opacity: 0.7;">Powered by GitHub Pages</p>
 </footer>
 
 </body>
