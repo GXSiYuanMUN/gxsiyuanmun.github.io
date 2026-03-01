@@ -5,220 +5,177 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>广西·思源模拟联合国大会 | SYMUN</title>
     <style>
-        /* --- 全局重置 (确保没有默认边距干扰) --- */
         :root {
-            --primary: #1a2a40;
-            --accent: #2d5a9b;
-            --light: #f7f9fc;
+            --primary: #1a2a40; /* 深蓝 */
+            --accent: #2d5a9b;  /* 亮蓝 */
+            --bg: #f0f2f5;      /* 浅灰背景 */
             --text: #333;
-            --white: #ffffff;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
+        html { scroll-behavior: smooth; }
         
-        html { 
-            scroll-behavior: smooth; 
-            /* 关键：防止顶部留白 */
-            height: 100%; 
-        }
-        body { 
-            background: var(--light); 
-            color: var(--text); 
-            line-height: 1.8; 
-            font-family: "Microsoft YaHei", "Helvetica Neue", sans-serif;
-            /* 关键：确保身体也占满高度 */
-            min-height: 100%; 
-            overflow-x: hidden;
+        body {
+            background-color: var(--bg); /* 整个页面浅灰，确保不白屏 */
+            color: var(--text);
+            line-height: 1.6;
         }
 
-        /* --- 导航栏 --- */
+        /* 导航栏 */
         nav {
-            background: rgba(26, 42, 64, 0.95);
-            backdrop-filter: blur(10px);
+            background: var(--primary);
             padding: 1rem;
             text-align: center;
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         nav a {
-            color: rgba(255,255,255,0.9);
+            color: white;
             margin: 0 0.8rem;
             text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            display: inline-block;
+            font-weight: bold;
+            font-size: 0.95rem;
         }
-        nav a:hover { color: #4da6ff; }
+        nav a:hover { text-decoration: underline; }
 
-        /* --- 首页封面 (重构版：稳健布局) --- */
+        /* --- 核心修改：英雄卡片式首页 --- */
         #home {
-            /* 核心修改：使用 min-height 而不是固定 height，防止内容溢出 */
-            min-height: 100vh; 
-            width: 100%;
-            
-            /* 背景：渐变 + 保底深色 */
-            background-color: #1a2a40; 
-            background-image: linear-gradient(135deg, #1a2a40 0%, #2d5a9b 100%);
-            
-            color: white;
-            
-            /* 布局：使用 Padding 推挤内容居中，比 Flex 更兼容 */
+            /* 不再使用 100vh，改用最小高度 + 上下大间距 */
+            min-height: 80vh; 
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
+            padding: 4rem 1.5rem;
+            background-color: var(--bg); /* 再次确保背景不白 */
+        }
+
+        .hero-card {
+            /* 这是一个实体的蓝色卡片，绝对能显示颜色！ */
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            width: 100%;
+            max-width: 800px;
+            padding: 4rem 2rem;
+            border-radius: 20px;
             text-align: center;
-            
-            padding: 4rem 1.5rem; /* 上下左右留足空间 */
+            box-shadow: 0 20px 50px rgba(26, 42, 64, 0.3); /* 大阴影增加立体感 */
             position: relative;
             overflow: hidden;
         }
 
-        /* 装饰圆圈 (简化版，防止动画卡顿) */
-        .circle {
+        /* 装饰光晕 */
+        .hero-card::before {
+            content: '';
             position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.03);
-            z-index: 0;
-        }
-        .c1 { width: 200px; height: 200px; top: 10%; left: 10%; }
-        .c2 { width: 300px; height: 300px; bottom: 10%; right: 10%; }
-
-        /* 文字内容容器 (确保层级在圆圈之上) */
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            animation: fadeIn 1.5s ease-out;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
 
-        #home h1 {
-            font-size: 3rem;
+        .hero-card h1 {
+            font-size: 2.8rem;
             margin-bottom: 1rem;
             letter-spacing: 2px;
             line-height: 1.2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
         }
-        #home p.subtitle {
-            font-size: 1.4rem;
-            font-weight: 300;
+        .hero-card p.subtitle {
+            font-size: 1.2rem;
             opacity: 0.9;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
         }
-        #home .tagline {
-            font-size: 1.1rem;
-            background: rgba(255,255,255,0.15);
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.2);
+        .hero-card .tagline {
             display: inline-block;
-            line-height: 1.5;
+            background: rgba(255,255,255,0.2);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            z-index: 1;
         }
-        #home .scroll-hint {
-            position: absolute;
-            bottom: 30px;
+        .scroll-hint {
+            display: block;
+            margin-top: 3rem;
+            color: rgba(255,255,255,0.6);
             font-size: 0.9rem;
-            opacity: 0.7;
             cursor: pointer;
             animation: bounce 2s infinite;
         }
 
-        /* --- 内容区域通用样式 --- */
+        /* 内容区域 */
         .container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 3rem 1.5rem;
+            padding: 2rem 1.5rem 4rem;
         }
         section {
-            background: var(--white);
+            background: white;
             padding: 2.5rem 2rem;
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem;
             border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            opacity: 0; /* 初始隐藏，用于滚动动画 */
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
         }
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        section.visible { opacity: 1; transform: translateY(0); }
         section h2 {
             color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
             border-left: 5px solid var(--accent);
             padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.6rem;
         }
 
-        /* --- 交互式画廊样式 --- */
-        .conference-item { margin-bottom: 2.5rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
-        .conference-item:last-child { border-bottom: none; }
-        
+        /* 画廊与交互 */
         .conf-title {
-            font-size: 1.5rem; color: var(--primary); cursor: pointer;
-            position: relative; display: inline-block; margin-bottom: 0.5rem;
+            font-size: 1.4rem; color: var(--primary); cursor: pointer;
+            display: inline-block; margin-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.3s;
         }
-        .conf-title::after {
-            content: ''; position: absolute; left: 0; bottom: -5px;
-            width: 0; height: 3px; background: var(--accent);
-            transition: width 0.3s;
-        }
-        .conf-title:hover { color: var(--accent); }
-        .conf-title:hover::after { width: 100%; }
-        
-        .conf-meta { color: #666; font-size: 0.9rem; display: block; margin-bottom: 1rem; }
-        
+        .conf-title:hover { border-bottom-color: var(--accent); }
         .toggle-btn {
-            display: inline-block; margin-top: 0.5rem; font-size: 0.9rem;
-            color: var(--accent); cursor: pointer; border: 1px solid var(--accent);
-            padding: 0.3rem 1rem; border-radius: 20px;
+            display: inline-block; margin-top: 0.5rem; font-size: 0.85rem;
+            color: var(--accent); border: 1px solid var(--accent);
+            padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer;
         }
-        .toggle-btn:hover { background: var(--accent); color: white; }
-
         .gallery-container {
-            max-height: 0; overflow: hidden;
-            transition: max-height 0.5s ease, opacity 0.5s ease;
-            opacity: 0;
+            max-height: 0; overflow: hidden; transition: all 0.5s ease;
         }
-        .gallery-container.open {
-            max-height: 2000px; opacity: 1; margin-top: 1.5rem;
-        }
+        .gallery-container.open { max-height: 1000px; margin-top: 1rem; }
         .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;
         }
-        .gallery-img {
-            width: 100%; height: 120px; object-fit: cover;
-            border-radius: 6px; background: #eee;
-        }
+        .gallery-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background: #eee; }
 
         ul, ol { margin-left: 1.5rem; margin-top: 1rem; }
         li { margin-bottom: 0.5rem; }
         .highlight {
-            background: #eef4ff; padding: 1.2rem; border-radius: 8px;
-            color: #2d5a9b; border-left: 4px solid var(--accent); margin: 1rem 0;
+            background: #eef4ff; padding: 1rem; border-radius: 8px;
+            border-left: 4px solid var(--accent); color: #2d5a9b; margin: 1rem 0;
         }
         .contact-card { background: #fff8e1; color: #856404; border-left-color: #ffc107; }
 
         footer {
-            text-align: center; padding: 3rem; background: var(--primary);
-            color: rgba(255,255,255,0.7); margin-top: 2rem;
+            text-align: center; padding: 2rem; background: var(--primary);
+            color: rgba(255,255,255,0.7); font-size: 0.9rem;
         }
 
-        /* 动画定义 */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
-        /* 手机端适配 */
         @media (max-width: 600px) {
-            #home h1 { font-size: 2rem; }
-            #home p.subtitle { font-size: 1.1rem; }
+            .hero-card h1 { font-size: 2rem; }
+            .hero-card { padding: 3rem 1.5rem; }
             nav a { display: block; margin: 0.5rem 0; }
-            .container { padding: 2rem 1rem; }
-            section { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
@@ -233,28 +190,23 @@
     <a href="#contact">联系我们</a>
 </nav>
 
-<!-- 首页封面：稳健版 -->
+<!-- 首页：实体卡片风格 -->
 <section id="home">
-    <div class="circle c1"></div>
-    <div class="circle c2"></div>
-    
-    <div class="hero-content">
+    <div class="hero-card">
         <h1>广西·思源模拟联合国大会</h1>
         <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
         <div class="tagline">
             学术本位 · 立足广西 · 胸怀世界<br>
             办惠及最广大学子的学术模联
         </div>
-    </div>
-    
-    <div class="scroll-hint" onclick="document.getElementById('about').scrollIntoView()">
-        向下滚动探索更多 ↓
+        <div class="scroll-hint" onclick="document.getElementById('about').scrollIntoView()">
+            向下滚动探索更多 ↓
+        </div>
     </div>
 </section>
 
 <div class="container">
 
-    <!-- 关于我们 -->
     <section id="about" class="animate-on-scroll">
         <h2>关于我们</h2>
         <p>广西·思源模拟联合国大会（SYMUN），是由现已毕业的<strong>柳州铁一中学模拟联合国社团</strong>优秀成员创立，并由<strong>共青团柳州铁一中学委员会</strong>指导的模拟联合国会议平台。</p>
@@ -265,15 +217,13 @@
         </div>
     </section>
 
-    <!-- 历届会议 -->
     <section id="history" class="animate-on-scroll">
         <h2>历届会议回顾</h2>
-        <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.9rem;">点击标题查看精彩瞬间</p>
+        <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">点击标题查看精彩瞬间</p>
 
-        <!-- 第四届 -->
-        <div class="conference-item">
+        <div class="conference-item" style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 2rem;">
             <h3 class="conf-title" onclick="toggleGallery('g4')">第四届广西·思源模联 · 2025</h3>
-            <span class="conf-meta">2025年8月 | 柳州 | 重温联合国创始初心</span>
+            <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年8月 | 柳州</span>
             <p>首次实现区外学团招募标准化，设有旧金山会议、INCB、GA 等会场。</p>
             <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看图片</span>
             <div id="g4" class="gallery-container">
@@ -285,11 +235,10 @@
             </div>
         </div>
 
-        <!-- 第三届 -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleGallery('g3')">第三届广西·思源模联 · 2025 (寒假)</h3>
-            <span class="conf-meta">2025年1月 | 开创首个历史会场</span>
-            <p>双会场平稳运行，本土历史会场成为名片。</p>
+            <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年1月</span>
+            <p>开创首个历史会场，双会场平稳运行。</p>
             <span class="toggle-btn" onclick="toggleGallery('g3')">✨ 查看图片</span>
             <div id="g3" class="gallery-container">
                 <div class="gallery-grid">
@@ -300,7 +249,6 @@
         </div>
     </section>
 
-    <!-- 学术体系 -->
     <section id="academic" class="animate-on-scroll">
         <h2>学术体系</h2>
         <p>坚持“学术本位”，提供从基础规则到危机应对的全方位培训。</p>
@@ -311,7 +259,6 @@
         </ul>
     </section>
 
-    <!-- 报名指南 -->
     <section id="apply" class="animate-on-scroll">
         <h2>报名指南</h2>
         <ol>
@@ -321,7 +268,6 @@
         </ol>
     </section>
 
-    <!-- 联系我们 -->
     <section id="contact" class="animate-on-scroll">
         <h2>联系我们</h2>
         <ul>
@@ -345,7 +291,6 @@
 </footer>
 
 <script>
-    // 滚动动画
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -356,13 +301,10 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.animate-on-scroll').forEach(sec => observer.observe(sec));
 
-    // 画廊切换
     function toggleGallery(id) {
         const el = document.getElementById(id);
         const isOpen = el.classList.contains('open');
-        // 关闭其他
         document.querySelectorAll('.gallery-container').forEach(g => g.classList.remove('open'));
-        // 切换当前
         if (!isOpen) el.classList.add('open');
     }
 </script>
