@@ -6,16 +6,16 @@
     <title>广西·思源模拟联合国大会 | SYMUN</title>
     <style>
         :root {
-            --primary: #1a2a40; /* 深蓝 */
-            --accent: #2d5a9b;  /* 亮蓝 */
-            --bg: #f0f2f5;      /* 浅灰背景 */
+            --primary: #1a2a40;
+            --accent: #2d5a9b;
+            --bg: #f0f2f5;
             --text: #333;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
         html { scroll-behavior: smooth; }
         
         body {
-            background-color: var(--bg); /* 整个页面浅灰，确保不白屏 */
+            background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
         }
@@ -39,20 +39,18 @@
         }
         nav a:hover { text-decoration: underline; }
 
-        /* --- 核心修改：英雄卡片式首页 --- */
+        /* 首页 */
         #home {
-            /* 不再使用 100vh，改用最小高度 + 上下大间距 */
             min-height: 80vh; 
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 4rem 1.5rem;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); /* 修正：将渐变背景移到这里 */
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
         }
 
         .hero-card {
-            /* 这是一个实体的蓝色卡片，绝对能显示颜色！ */
             background: rgba(0, 0, 0, 0.2);
             color: white;
             width: 100%;
@@ -60,65 +58,20 @@
             padding: 4rem 2rem;
             border-radius: 20px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(26, 42, 64, 0.3); /* 大阴影增加立体感 */
+            box-shadow: 0 20px 50px rgba(26, 42, 64, 0.3);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* 装饰光晕 */
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-card h1 {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-            line-height: 1.2;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-card p.subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            font-weight: 300;
-            position: relative;
-            z-index: 1;
-        }
-        .hero-card .tagline {
-            display: inline-block;
-            background: rgba(255,255,255,0.2);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-size: 1rem;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.3);
-            position: relative;
-            z-index: 1;
-        }
-        .scroll-hint {
-            display: block;
-            margin-top: 3rem;
-            color: rgba(255,255,255,0.6);
-            font-size: 0.9rem;
-            cursor: pointer;
-            animation: bounce 2s infinite;
-        }
+        .hero-card h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: 2px; line-height: 1.2; position: relative; z-index: 1; }
+        .hero-card p.subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 300; position: relative; z-index: 1; }
+        .hero-card .tagline { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); position: relative; z-index: 1; }
+        .scroll-hint { display: block; margin-top: 3rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; cursor: pointer; animation: bounce 2s infinite; }
 
         /* 内容区域 */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1.5rem 4rem;
-        }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
         section {
             background: white;
             padding: 2.5rem 2rem;
@@ -130,49 +83,59 @@
             transition: all 0.6s ease;
         }
         section.visible { opacity: 1; transform: translateY(0); }
-        section h2 {
-            color: var(--primary);
-            border-left: 5px solid var(--accent);
-            padding-left: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.6rem;
-        }
+        section h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem; font-size: 1.6rem; }
 
         /* 画廊与交互 */
-        .conf-title {
-            font-size: 1.4rem; color: var(--primary); cursor: pointer;
-            display: inline-block; margin-bottom: 0.5rem;
-            border-bottom: 2px solid transparent;
-            transition: border-color 0.3s;
-        }
+        .conf-title { font-size: 1.4rem; color: var(--primary); cursor: pointer; display: inline-block; margin-bottom: 0.5rem; border-bottom: 2px solid transparent; transition: border-color 0.3s; }
         .conf-title:hover { border-bottom-color: var(--accent); }
-        .toggle-btn {
-            display: inline-block; margin-top: 0.5rem; font-size: 0.85rem;
-            color: var(--accent); border: 1px solid var(--accent);
-            padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer;
-        }
-        .gallery-container {
-            max-height: 0; overflow: hidden; transition: all 0.5s ease;
-        }
-        .gallery-container.open { max-height: 1000px; margin-top: 1rem; }
+        .toggle-btn { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer; }
+        
+        .gallery-container { max-height: 0; overflow: hidden; transition: all 0.5s ease; }
+        .gallery-container.open { max-height: 2000px; margin-top: 1rem; }
+        
         .gallery-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
         }
-        .gallery-img { width: 100%; height: 120px; object-fit: cover; border-radius: 6px; background: #eee; }
+
+        /* --- 新增：图片容器和标签样式 --- */
+        .gallery-item {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #eee;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
+        }
+        .img-caption {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            pointer-events: none;
+            backdrop-filter: blur(2px);
+            max-width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
         ul, ol { margin-left: 1.5rem; margin-top: 1rem; }
         li { margin-bottom: 0.5rem; }
-        .highlight {
-            background: #eef4ff; padding: 1rem; border-radius: 8px;
-            border-left: 4px solid var(--accent); color: #2d5a9b; margin: 1rem 0;
-        }
+        .highlight { background: #eef4ff; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--accent); color: #2d5a9b; margin: 1rem 0; }
         .contact-card { background: #fff8e1; color: #856404; border-left-color: #ffc107; }
 
-        footer {
-            text-align: center; padding: 2rem; background: var(--primary);
-            color: rgba(255,255,255,0.7); font-size: 0.9rem;
-        }
-
+        footer { text-align: center; padding: 2rem; background: var(--primary); color: rgba(255,255,255,0.7); font-size: 0.9rem; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
         @media (max-width: 600px) {
@@ -193,7 +156,7 @@
     <a href="#contact">联系我们</a>
 </nav>
 
-<!-- 首页：实体卡片风格 -->
+<!-- 首页 -->
 <div id="home" class="animate-on-scroll">
     <div class="hero-card">
         <h1>广西·思源模拟联合国大会</h1>
@@ -224,49 +187,61 @@
         <h2>历届会议回顾</h2>
         <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">点击标题查看精彩瞬间</p>
 
+        <!-- 第四届 -->
         <div class="conference-item" style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 2rem;">
             <h3 class="conf-title" onclick="toggleGallery('g4')">第四届广西·思源模联 · 2025</h3>
             <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年8月 | 柳州</span>
-            <p>首次实现区外学团招募标准化，设有旧金山会议、联合国麻醉药品委员会、联合国大会非正式会议和主新闻中心四个委员会。</p>
+            <p>首次实现区外学团招募标准化，设有旧金山会议、CND (麻委会)、联大非正式会议和主新闻中心四个委员会。</p>
             <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看图片</span>
+            
+            <!-- 第四届图片区 (ID=g4) -->
             <div id="g4" class="gallery-container">
                 <div class="gallery-grid">
-                    <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=Opening" class="gallery-img">
-                    <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=Debate" class="gallery-img">
-                    <img src="https://via.placeholder.com/400x300/3a6bb5/fff?text=Award" class="gallery-img">
+                    <!-- 这里暂时用占位图，等你上传第四届照片后，把 src 改成文件名，并加上 caption -->
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=SYMUN+4th+1" alt="第四届图1">
+                        <span class="img-caption">待更新</span>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+4th+2" alt="第四届图2">
+                        <span class="img-caption">待更新</span>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- 第三届 -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleGallery('g3')">第三届广西·思源模联 · 2025 (寒假)</h3>
             <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年1月</span>
             <p>开创首个历史会场，双会场平稳运行。</p>
             <span class="toggle-btn" onclick="toggleGallery('g3')">✨ 查看图片</span>
-           <!-- 第四届图片区 -->
-<div id="g4" class="gallery-container">
-    <div class="gallery-grid">
-        
-        <!-- 图片 1 -->
-        <div class="gallery-item">
-            <img src="symun-open.jpg" alt="开幕式">
-            <span class="img-caption">开幕式</span>
-        </div>
+            
+            <!-- 第三届图片区 (ID=g3，已修正) -->
+            <div id="g3" class="gallery-container">
+                <div class="gallery-grid">
+                    
+                    <!-- 图片 1 -->
+                    <div class="gallery-item">
+                        <img src="symun-open.jpg" alt="开幕式">
+                        <span class="img-caption">开幕式</span>
+                    </div>
 
-        <!-- 图片 2 -->
-        <div class="gallery-item">
-            <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
-            <span class="img-caption">1787费城制宪会议现场</span>
-        </div>
+                    <!-- 图片 2 (注意文件名必须和你上传的一模一样) -->
+                    <div class="gallery-item">
+                        <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
+                        <span class="img-caption">1787费城制宪会议现场</span>
+                    </div>
 
-        <!-- 图片 3 -->
-        <div class="gallery-item">
-            <img src="award.jpg" alt="颁奖">
-            <span class="img-caption">颁奖典礼</span>
-        </div>
+                    <!-- 图片 3 -->
+                    <div class="gallery-item">
+                        <img src="award.jpg" alt="颁奖">
+                        <span class="img-caption">颁奖典礼</span>
+                    </div>
 
-    </div>
-</div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="academic" class="animate-on-scroll">
@@ -324,7 +299,9 @@
     function toggleGallery(id) {
         const el = document.getElementById(id);
         const isOpen = el.classList.contains('open');
+        // 关闭所有其他
         document.querySelectorAll('.gallery-container').forEach(g => g.classList.remove('open'));
+        // 打开当前
         if (!isOpen) el.classList.add('open');
     }
 </script>
