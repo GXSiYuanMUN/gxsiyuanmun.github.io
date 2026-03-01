@@ -47,12 +47,13 @@
             justify-content: center;
             align-items: center;
             padding: 4rem 1.5rem;
-            background-color: var(--bg); /* 再次确保背景不白 */
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%); /* 修正：将渐变背景移到这里 */
+            color: white;
         }
 
         .hero-card {
             /* 这是一个实体的蓝色卡片，绝对能显示颜色！ */
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            background: rgba(0, 0, 0, 0.2);
             color: white;
             width: 100%;
             max-width: 800px;
@@ -62,6 +63,8 @@
             box-shadow: 0 20px 50px rgba(26, 42, 64, 0.3); /* 大阴影增加立体感 */
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* 装饰光晕 */
@@ -191,7 +194,7 @@
 </nav>
 
 <!-- 首页：实体卡片风格 -->
-<section id="home">
+<div id="home" class="animate-on-scroll">
     <div class="hero-card">
         <h1>广西·思源模拟联合国大会</h1>
         <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
@@ -203,7 +206,7 @@
             向下滚动探索更多 ↓
         </div>
     </div>
-</section>
+</div>
 
 <div class="container">
 
