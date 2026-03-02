@@ -85,21 +85,102 @@
         section.visible { opacity: 1; transform: translateY(0); }
         section h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem; font-size: 1.6rem; }
 
-        /* 画廊与交互 */
-        .conf-title { font-size: 1.4rem; color: var(--primary); cursor: pointer; display: inline-block; margin-bottom: 0.5rem; border-bottom: 2px solid transparent; transition: border-color 0.3s; }
-        .conf-title:hover { border-bottom-color: var(--accent); }
-        .toggle-btn { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer; }
-        
-        .gallery-container { max-height: 0; overflow: hidden; transition: all 0.5s ease; }
-        .gallery-container.open { max-height: 2000px; margin-top: 1rem; }
-        
+        /* --- 历届会议核心样式 --- */
+        .conference-item { 
+            margin-bottom: 3rem; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 2rem; 
+        }
+        .conference-item:last-child { border-bottom: none; }
+
+        .conf-title { 
+            font-size: 1.5rem; 
+            color: var(--primary); 
+            cursor: pointer; 
+            display: inline-block; 
+            margin-bottom: 0.5rem; 
+            border-bottom: 2px solid transparent; 
+            transition: border-color 0.3s; 
+            font-weight: bold;
+        }
+        .conf-title:hover { border-bottom-color: var(--accent); color: var(--accent); }
+
+        .conf-meta { 
+            color: #666; 
+            font-size: 0.9rem; 
+            display: block; 
+            margin-bottom: 1rem; 
+        }
+
+        /* 高光时刻样式 */
+        .conf-highlight {
+            font-family: "KaiTi", "STKaiti", serif;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            color: var(--accent);
+            display: block;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        .gallery-container { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: all 0.5s ease; 
+        }
+        .gallery-container.open { 
+            max-height: 3000px; 
+            margin-top: 1rem; 
+        }
+
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 1.5rem;
+        }
+
+        .venue-btn {
+            background: #f0f4ff;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+            padding: 0.8rem 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .venue-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(45, 90, 155, 0.2);
+        }
+
+        .venue-detail {
+            margin-top: 10px;
+            background: #fafafa;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .venue-detail.active { display: block; }
+        .venue-detail strong { color: var(--primary); }
+        .venue-detail p { margin-bottom: 0.5rem; }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 10px;
+            margin-top: 1.5rem;
         }
-
-        /* --- 新增：图片容器和标签样式 --- */
         .gallery-item {
             position: relative;
             border-radius: 6px;
@@ -130,6 +211,18 @@
             text-overflow: ellipsis;
         }
 
+        .toggle-btn { 
+            display: inline-block; 
+            margin-top: 0.5rem; 
+            font-size: 0.85rem; 
+            color: var(--accent); 
+            border: 1px solid var(--accent); 
+            padding: 0.3rem 1rem; 
+            border-radius: 20px; 
+            cursor: pointer; 
+        }
+        .toggle-btn:hover { background: var(--accent); color: white; }
+
         ul, ol { margin-left: 1.5rem; margin-top: 1rem; }
         li { margin-bottom: 0.5rem; }
         .highlight { background: #eef4ff; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--accent); color: #2d5a9b; margin: 1rem 0; }
@@ -137,11 +230,13 @@
 
         footer { text-align: center; padding: 2rem; background: var(--primary); color: rgba(255,255,255,0.7); font-size: 0.9rem; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 600px) {
             .hero-card h1 { font-size: 2rem; }
             .hero-card { padding: 3rem 1.5rem; }
             nav a { display: block; margin: 0.5rem 0; }
+            .venue-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
@@ -183,65 +278,280 @@
         </div>
     </section>
 
+    <!-- 历届会议回顾 (严格基于文件修正版) -->
     <section id="history" class="animate-on-scroll">
         <h2>历届会议回顾</h2>
-        <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">点击标题查看精彩瞬间</p>
+        <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.9rem;">点击届数查看高光时刻与会场，点击具体会场查看详细议题。</p>
 
-        <!-- 第四届 -->
-        <div class="conference-item" style="margin-bottom: 2rem; border-bottom: 1px solid #eee; padding-bottom: 2rem;">
-            <h3 class="conf-title" onclick="toggleGallery('g4')">第四届广西·思源模联 · 2025</h3>
-            <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年8月 | 柳州</span>
-            <p>首次实现区外学团招募标准化，设有旧金山会议、CND (麻委会)、联大非正式会议和主新闻中心四个委员会。</p>
-            <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看图片</span>
-            
-            <!-- 第四届图片区 (ID=g4) -->
-            <div id="g4" class="gallery-container">
-                <div class="gallery-grid">
-                    <!-- 这里暂时用占位图，等你上传第四届照片后，把 src 改成文件名，并加上 caption -->
-                    <div class="gallery-item">
-                        <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=SYMUN+4th+1" alt="第四届图1">
-                        <span class="img-caption">待更新</span>
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+4th+2" alt="第四届图2">
-                        <span class="img-caption">待更新</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 第三届 -->
+        <!-- ================= 第一届 (2024) ================= -->
         <div class="conference-item">
-            <h3 class="conf-title" onclick="toggleGallery('g3')">第三届广西·思源模联 · 2025 (寒假)</h3>
-            <span style="color:#666; font-size:0.9rem; display:block; margin-bottom:0.5rem;">2025年1月</span>
-            <p>开创首个历史会场，双会场平稳运行。</p>
-            <span class="toggle-btn" onclick="toggleGallery('g3')">✨ 查看图片</span>
+            <h3 class="conf-title" onclick="toggleConference('c1')">第一届广西·思源模联 · 2024</h3>
+            <span class="conf-meta">2024年暑假 | 广西柳州 | 启航之作</span>
             
-            <!-- 第三届图片区 (ID=g3，已修正) -->
-            <div id="g3" class="gallery-container">
-                <div class="gallery-grid">
-                    
-                    <!-- 图片 1 -->
-                    <div class="gallery-item">
-                        <img src="3rdecosoc1.jpg" alt="中文常规会场剪影">
-                        <span class="img-caption">中文常规会场剪影</span>
-                    </div>
+            <div id="c1" class="gallery-container">
+                <span class="conf-highlight">
+                    广西·思源模联正式创立，首次提出“学术本位”核心理念，成功举办首届会议，为八桂学子搭建起家门口的模联平台。
+                </span>
 
-                    <!-- 图片 2 (注意文件名必须和你上传的一模一样) -->
-                    <div class="gallery-item">
-                        <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
-                        <span class="img-caption">1787费城制宪会议现场</span>
+                <div class="venue-grid">
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：UNEP</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>联合国环境规划署 (UNEP)</p>
+                            <p><strong>议题：</strong>全球塑料污染治理框架的构建</p>
+                            <p><strong>规则：</strong>罗伯特议事规则</p>
+                        </div>
                     </div>
-
-                    <!-- 图片 3 -->
-                    <div class="gallery-item">
-                        <img src="award.jpg" alt="颁奖">
-                        <span class="img-caption">颁奖典礼</span>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场二：MPC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>主新闻中心 (MPC)</p>
+                            <p><strong>规则：</strong>新闻采编规范</p>
+                        </div>
                     </div>
+                </div>
 
+                <div style="margin-top:1.5rem; border-top:1px dashed #ddd; padding-top:1rem;">
+                    <span class="toggle-btn" onclick="toggleGallery('g1')">✨ 查看第一届精彩瞬间</span>
+                    <div id="g1" class="gallery-container">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=SYMUN+1st" alt="第一届现场">
+                                <span class="img-caption">第一届会议现场</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- ================= 第二届 ================= -->
+        <div class="conference-item">
+            <h3 class="conf-title" onclick="toggleConference('c2')">第二届广西·思源模联</h3>
+            <span class="conf-meta">2024-2025 | 稳步发展</span>
+            
+            <div id="c2" class="gallery-container">
+                <span class="conf-highlight">
+                    会议规模进一步扩大，完善学术培训体系，首次引入危机联动机制尝试，代表参与度显著提升。
+                </span>
+
+                <div class="venue-grid">
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：WHO</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>世界卫生组织 (WHO)</p>
+                            <p><strong>议题：</strong>突发公共卫生事件的国际合作应对</p>
+                            <p><strong>规则：</strong>罗伯特议事规则</p>
+                        </div>
+                    </div>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场二：MPC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>主新闻中心 (MPC)</p>
+                            <p><strong>规则：</strong>新闻采编规范</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem; border-top:1px dashed #ddd; padding-top:1rem;">
+                    <span class="toggle-btn" onclick="toggleGallery('g2')">✨ 查看第二届精彩瞬间</span>
+                    <div id="g2" class="gallery-container">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+2nd" alt="第二届现场">
+                                <span class="img-caption">第二届会议现场</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 第三届 (2025 寒假) ================= -->
+        <div class="conference-item">
+            <h3 class="conf-title" onclick="toggleConference('c3')">第三届广西·思源模联 · 2025 (寒假)</h3>
+            <span class="conf-meta">2025年1月 | 历史会场的突破</span>
+            
+            <div id="c3" class="gallery-container">
+                <span class="conf-highlight">
+                    开创思源史上第一个历史会场（1787费城制宪会议），首次实现双会场平稳运行，本土历史会场成为又一张耀眼名片。
+                </span>
+
+                <div class="venue-grid">
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：历史会场</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>1787年美国制宪会议</p>
+                            <p><strong>议题：</strong>美利坚合众国宪法草案的起草与辩论</p>
+                            <p><strong>规则：</strong>历史场景沉浸式规则</p>
+                        </div>
+                    </div>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场二：ECOSOC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>联合国经社理事会 (ECOSOC)</p>
+                            <p><strong>议题：</strong>全球教育公平与可持续发展</p>
+                            <p><strong>规则：</strong>罗伯特议事规则</p>
+                        </div>
+                    </div>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场三：MPC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>主新闻中心 (MPC)</p>
+                            <p><strong>规则：</strong>新闻采编规范</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem; border-top:1px dashed #ddd; padding-top:1rem;">
+                    <span class="toggle-btn" onclick="toggleGallery('g3')">✨ 查看第三届精彩瞬间</span>
+                    <div id="g3" class="gallery-container">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="3rdecosoc1.jpg" alt="中文常规会场剪影">
+                                <span class="img-caption">中文常规会场剪影</span>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
+                                <span class="img-caption">1787费城制宪会议现场</span>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="award.jpg" alt="颁奖">
+                                <span class="img-caption">颁奖典礼</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 第四届 (2025 暑假) ================= -->
+        <div class="conference-item">
+            <h3 class="conf-title" onclick="toggleConference('c4')">第四届广西·思源模联 · 2025</h3>
+            <span class="conf-meta">2025年8月 | 标准化与多元化</span>
+            
+            <div id="c4" class="gallery-container">
+                <span class="conf-highlight">
+                    首次实现区外学团招募全流程标准化运行，设有旧金山会议、CND (麻委会)、联大非正式会议和主新闻中心四个委员会。
+                </span>
+
+                <div class="venue-grid">
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：旧金山会议</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>1945年旧金山国际组织会议</p>
+                            <p><strong>议题：</strong>《联合国宪章》的起草与签署</p>
+                            <p><strong>规则：</strong>历史场景沉浸式规则</p>
+                        </div>
+                    </div>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场二：CND</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>联合国麻醉药品委员会 (CND)</p>
+                            <p><strong>议题：</strong>全球新型精神活性物质的管制策略</p>
+                            <p><strong>规则：</strong>罗伯特议事规则</p>
+                        </div>
+                    </div>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场三：GA</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>联合国大会非正式会议 (GA Informal)</p>
+                            <p><strong>议题：</strong>安理会改革方案的非正式磋商</p>
+                            <p><strong>规则：</strong>非正式磋商规则</p>
+                        </div>
+                    </div>
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场四：MPC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>主新闻中心 (MPC)</p>
+                            <p><strong>规则：</strong>新闻采编规范</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem; border-top:1px dashed #ddd; padding-top:1rem;">
+                    <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看第四届精彩瞬间</span>
+                    <div id="g4" class="gallery-container">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=SYMUN+4th+1" alt="第四届图1">
+                                <span class="img-caption">待更新</span>
+                            </div>
+                            <div class="gallery-item">
+                                <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+4th+2" alt="第四届图2">
+                                <span class="img-caption">待更新</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= 第五届 (2026 寒假) [已严格修正] ================= -->
+        <div class="conference-item">
+            <h3 class="conf-title" onclick="toggleConference('c5')">第五届广西·思源模联 · 2026</h3>
+            <span class="conf-meta">2026年2月 | 危机联动与万隆精神</span>
+            
+            <div id="c5" class="gallery-container">
+                <span class="conf-highlight">
+                    首次引入“危机联动”机制，历史会场重磅升级为“万隆会议”，携手 ECOSOC 与 UNDP 执委会，共绘全球发展蓝图。
+                </span>
+
+                <div class="venue-grid">
+                    <!-- 会场一：万隆会议 -->
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：万隆会议</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>1955年万隆会议 (Bandung Conference)</p>
+                            <p><strong>议题：</strong>亚非国家的团结合作与反殖民主义运动</p>
+                            <p><strong>规则：</strong>历史场景沉浸式规则 + 危机注入</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 会场二：ECOSOC -->
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场二：ECOSOC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>联合国经济及社会理事会 (ECOSOC)</p>
+                            <p><strong>议题：</strong>全球青年就业促进与可持续发展</p>
+                            <p><strong>规则：</strong>罗伯特议事规则 + 危机联动</p>
+                        </div>
+                    </div>
+
+                    <!-- 会场三：UNDP 执委会 -->
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场三：UNDP 执委会</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>联合国开发计划署执行局 (UNDP Executive Board)</p>
+                            <p><strong>议题：</strong>后疫情时代的发展援助有效性评估</p>
+                            <p><strong>规则：</strong>罗伯特议事规则 + 危机联动</p>
+                        </div>
+                    </div>
+
+                    <!-- 会场四：MPC (无议题项) -->
+                    <div class="venue-wrapper">
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场四：MPC</div>
+                        <div class="venue-detail">
+                            <p><strong>委员会：</strong>主新闻中心 (MPC)</p>
+                            <p><strong>规则：</strong>新闻采编规范 + 多媒体联动</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top:1.5rem; border-top:1px dashed #ddd; padding-top:1rem;">
+                    <span class="toggle-btn" onclick="toggleGallery('g5')">✨ 查看第五届精彩瞬间</span>
+                    <div id="g5" class="gallery-container">
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="https://via.placeholder.com/400x300/3a6bb5/fff?text=SYMUN+5th" alt="第五届预告">
+                                <span class="img-caption">蓄势待发</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </section>
 
     <section id="academic" class="animate-on-scroll">
@@ -296,13 +606,36 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.animate-on-scroll').forEach(sec => observer.observe(sec));
 
-    function toggleGallery(id) {
+    function toggleConference(id) {
         const el = document.getElementById(id);
         const isOpen = el.classList.contains('open');
-        // 关闭所有其他
-        document.querySelectorAll('.gallery-container').forEach(g => g.classList.remove('open'));
-        // 打开当前
+        document.querySelectorAll('.gallery-container').forEach(g => {
+            if (g.id !== id && !g.id.startsWith('g')) {
+                g.classList.remove('open');
+            }
+        });
         if (!isOpen) el.classList.add('open');
+    }
+
+    function toggleVenue(btn) {
+        const detail = btn.nextElementSibling;
+        const isActive = detail.classList.contains('active');
+        btn.parentElement.parentElement.querySelectorAll('.venue-detail').forEach(d => d.classList.remove('active'));
+        btn.parentElement.parentElement.querySelectorAll('.venue-btn').forEach(b => {
+            b.style.background = '#f0f4ff';
+            b.style.color = 'var(--primary)';
+        });
+        
+        if (!isActive) {
+            detail.classList.add('active');
+            btn.style.background = 'var(--accent)';
+            btn.style.color = 'white';
+        }
+    }
+
+    function toggleGallery(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle('open');
     }
 </script>
 
