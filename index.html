@@ -249,6 +249,22 @@
             nav a { display: block; margin: 0.5rem 0; }
             .venue-grid { grid-template-columns: 1fr 1fr; }
         }
+            /* --- 新增代码开始 --- */
+
+                / * 1. 让带有 "big-photo" 标记的盒子，强制独占一行（从第1列跨到最后一列） */
+            .gallery-item.big-photo {
+            grid-column: 1 / -1; 
+            width: 100%;
+            }
+
+            /* 2. 确保这个盒子里的图片也是宽宽的 */
+            .gallery-item.big-photo img {
+                width: 100%;
+                height: auto; /* 高度自动，保持比例 */
+                display: block;
+            }
+
+                /* --- 新增代码结束 --- */
     </style>
 </head>
 <body>
@@ -491,7 +507,7 @@
                     <div id="g4" class="gallery-container">
                         <div class="gallery-grid">
                             <!-- 修复：统一使用 class="img-caption"，文字放在标签内 -->
-                            <div class="gallery-item">
+                            <div class="gallery-item big-photo">
                                 <img src="4thgagp.jpg" alt="联大会场合影" class="full-view-img">
                                 <span class="img-caption">联大会场合影</span>
                             </div>
