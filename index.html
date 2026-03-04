@@ -65,85 +65,28 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* ---  新增：动画样式开始 --- */
-        
-        /* 1. 标题动画：从上方滑入 */
+        /* --- 动画样式 --- */
         .hero-card h1 { 
-            font-size: 2.8rem; 
-            margin-bottom: 1rem; 
-            letter-spacing: 2px; 
-            line-height: 1.2; 
-            position: relative; 
-            z-index: 1; 
-            
-            /* 初始状态：隐藏且向上偏移 */
-            opacity: 0;
-            transform: translateY(-40px);
-            /* 应用动画：名字 时长 曲线 结束后保持状态 */
+            font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: 2px; line-height: 1.2; position: relative; z-index: 1; 
+            opacity: 0; transform: translateY(-40px);
             animation: slideInFromTop 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
-
-        /* 2. 副标题动画：从下方轻微浮入 */
         .hero-card p.subtitle { 
-            font-size: 1.2rem; 
-            opacity: 0; /* 初始隐藏 */
-            margin-bottom: 2rem; 
-            font-weight: 300; 
-            position: relative; 
-            z-index: 1; 
-            
+            font-size: 1.2rem; opacity: 0; margin-bottom: 2rem; font-weight: 300; position: relative; z-index: 1; 
             transform: translateY(20px);
-            /* 延迟 0.3秒 执行，制造层次感 */
             animation: fadeInUp 1s ease-out 0.3s forwards;
         }
-
-        /* 3. 标语动画：淡入 */
         .hero-card .tagline { 
-            display: inline-block; 
-            background: rgba(255,255,255,0.2); 
-            padding: 0.8rem 2rem; 
-            border-radius: 50px; 
-            font-size: 1rem; 
-            backdrop-filter: blur(5px); 
-            border: 1px solid rgba(255,255,255,0.3); 
-            position: relative; 
-            z-index: 1; 
-            
+            display: inline-block; background: rgba(255,255,255,0.2); padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); position: relative; z-index: 1; 
             opacity: 0;
-            /* 延迟 0.6秒 执行 */
             animation: fadeInSimple 0.8s ease-out 0.6s forwards;
         }
 
-        /* --- 动画关键帧定义 --- */
-        @keyframes slideInFromTop {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes slideInFromTop { to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { to { opacity: 0.9; transform: translateY(0); } }
+        @keyframes fadeInSimple { to { opacity: 1; } }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 0.9; /* 保持原有的轻微透明感 */
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInSimple {
-            to {
-                opacity: 1;
-            }
-        }
-        /* --- 🚀 动画样式结束 --- */
-
-        .scroll-hint { 
-            display: block; 
-            margin-top: 3rem; 
-            color: rgba(255,255,255,0.6); 
-            font-size: 0.9rem; 
-            cursor: pointer; 
-            animation: bounce 2s infinite; 
-        }
+        .scroll-hint { display: block; margin-top: 3rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; cursor: pointer; animation: bounce 2s infinite; }
 
         /* 内容区域 */
         .container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
@@ -161,152 +104,123 @@
         section h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem; font-size: 1.6rem; }
 
         /* --- 历届会议核心样式 --- */
-        .conference-item { 
-            margin-bottom: 3rem; 
-            border-bottom: 1px solid #eee; 
-            padding-bottom: 2rem; 
-        }
+        .conference-item { margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
         .conference-item:last-child { border-bottom: none; }
 
-        .conf-title { 
-            font-size: 1.5rem; 
-            color: var(--primary); 
-            cursor: pointer; 
-            display: inline-block; 
-            margin-bottom: 0.5rem; 
-            border-bottom: 2px solid transparent; 
-            transition: border-color 0.3s; 
-            font-weight: bold;
-        }
+        .conf-title { font-size: 1.5rem; color: var(--primary); cursor: pointer; display: inline-block; margin-bottom: 0.5rem; border-bottom: 2px solid transparent; transition: border-color 0.3s; font-weight: bold; }
         .conf-title:hover { border-bottom-color: var(--accent); color: var(--accent); }
+        .conf-meta { color: #666; font-size: 0.9rem; display: block; margin-bottom: 1rem; }
+        .conf-highlight { font-family: "KaiTi", "STKaiti", serif; font-weight: bold; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; color: var(--accent); display: block; margin: 1rem 0; line-height: 1.6; }
 
-        .conf-meta { 
-            color: #666; 
-            font-size: 0.9rem; 
-            display: block; 
-            margin-bottom: 1rem; 
-        }
+        .gallery-container { max-height: 0; overflow: hidden; transition: all 0.5s ease; }
+        .gallery-container.open { max-height: 3000px; margin-top: 1rem; }
 
-        /* 高光时刻样式 */
-        .conf-highlight {
-            font-family: "KaiTi", "STKaiti", serif;
-            font-weight: bold;
-            text-decoration: underline;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 4px;
-            color: var(--accent);
-            display: block;
-            margin: 1rem 0;
-            line-height: 1.6;
-        }
-
-        .gallery-container { 
-            max-height: 0; 
-            overflow: hidden; 
-            transition: all 0.5s ease; 
-        }
-        .gallery-container.open { 
-            max-height: 3000px; 
-            margin-top: 1rem; 
-        }
-
-        .venue-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 1.5rem;
-        }
-
-        .venue-btn {
-            background: #f0f4ff;
-            color: var(--primary);
-            border: 1px solid var(--accent);
-            padding: 0.8rem 0.5rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        .venue-btn:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(45, 90, 155, 0.2);
-        }
-
-        .venue-detail {
-            margin-top: 10px;
-            background: #fafafa;
-            border-left: 3px solid var(--accent);
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
+        .venue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 1.5rem; }
+        .venue-btn { background: #f0f4ff; color: var(--primary); border: 1px solid var(--accent); padding: 0.8rem 0.5rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s; text-align: center; }
+        .venue-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(45, 90, 155, 0.2); }
+        .venue-detail { margin-top: 10px; background: #fafafa; border-left: 3px solid var(--accent); padding: 1rem; border-radius: 0 8px 8px 0; font-size: 0.9rem; display: none; animation: fadeIn 0.4s ease; }
         .venue-detail.active { display: block; }
         .venue-detail strong { color: var(--primary); }
         .venue-detail p { margin-bottom: 0.5rem; }
 
+        /* --- 🌟 画廊网格系统 (核心修改) --- */
         .gallery-grid {
             display: grid;
+            /* 默认：自动填充，最小150px，形成三列布局 */
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
+            gap: 12px;
             margin-top: 1.5rem;
+            align-items: start;
         }
+
         .gallery-item {
             position: relative;
             border-radius: 6px;
             overflow: hidden;
             background: #eee;
+            /* 保持卡片比例，让网格更整齐 */
+            aspect-ratio: 4/3; 
+            transition: transform 0.3s;
         }
+
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
         .gallery-item img {
             width: 100%;
-            height: 120px;
-            object-fit: cover;
+            height: 100%;
+            object-fit: cover; /* 默认裁剪填满 */
             display: block;
-            border-radius: 6px;
+            transition: transform 0.5s;
         }
-                 /* --- 专属：第一届全景大图模式 --- */
-        .gallery-item img.full-view-img {
-            width: 100%;            
-            height: auto;           
-            max-height: none;       
-            object-fit: contain;    
-            display: block;
-            border-radius: 6px;
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 全景大图特殊类：强制独占一行 */
+        .gallery-item.big-photo {
+            grid-column: 1 / -1; /* 从第1列跨到最后一列 */
+            width: 100%;
+            aspect-ratio: auto; /* 解除比例限制，由图片决定高度 */
+            max-height: none;
+        }
+
+        .gallery-item.big-photo img {
+            width: 100%;
+            height: auto; /* 高度自适应 */
+            max-height: 600px; /* 限制最大高度，防止太长 */
+            object-fit: contain; /* 完整显示图片 */
             background-color: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
+
+        /* --- 🌟 重点修改：可互动的文字标签 --- */
         .img-caption {
             position: absolute;
             top: 8px;
             right: 8px;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.75);
             color: white;
             font-size: 0.75rem;
-            padding: 4px 8px;
+            padding: 5px 10px;
             border-radius: 4px;
-            pointer-events: none;
-            backdrop-filter: blur(2px);
-            max-width: 80%;
+            pointer-events: auto;
+            backdrop-filter: blur(4px);
+            
+            /* 关键：限制宽度，超出省略 */
+            max-width: 60%; 
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            
+            /* 动画过渡 */
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 10;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        .toggle-btn { 
-            display: inline-block; 
-            margin-top: 0.5rem; 
-            font-size: 0.85rem; 
-            color: var(--accent); 
-            border: 1px solid var(--accent); 
-            padding: 0.3rem 1rem; 
-            border-radius: 20px; 
-            cursor: pointer; 
+        /* 悬停、激活或点击后的展开状态 */
+        .img-caption:hover, 
+        .img-caption:active,
+        .img-caption.expanded {
+            max-width: 80%; /* 展开后变宽 */
+            background: rgba(0, 0, 0, 0.95);
+            padding: 8px 14px;
+            white-space: normal; /* 允许换行 */
+            overflow: visible;
+            text-overflow: clip;
+            transform: translateX(-5px) translateY(-2px); /* 微微向左上浮动 */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            font-size: 0.8rem;
+            line-height: 1.4;
         }
+
+        .toggle-btn { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer; transition: all 0.3s; }
         .toggle-btn:hover { background: var(--accent); color: white; }
 
         ul, ol { margin-left: 1.5rem; margin-top: 1rem; }
@@ -323,17 +237,10 @@
             .hero-card { padding: 3rem 1.5rem; }
             nav a { display: block; margin: 0.5rem 0; }
             .venue-grid { grid-template-columns: 1fr 1fr; }
-        }
-        
-        /* --- 大图布局修正 --- */
-        .gallery-item.big-photo {
-            grid-column: 1 / -1; 
-            width: 100%;
-        }
-        .gallery-item.big-photo img {
-            width: 100%;
-            height: auto; 
-            display: block;
+            /* 手机上保证一行两个小图 */
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .img-caption { font-size: 0.65rem; padding: 3px 6px; max-width: 50%; }
+            .img-caption:hover, .img-caption.expanded { max-width: 90%; font-size: 0.75rem; }
         }
     </style>
 </head>
@@ -351,7 +258,6 @@
 <!-- 首页 -->
 <div id="home" class="animate-on-scroll">
     <div class="hero-card">
-        <!-- 这里的 h1, p, div 现在都会自动播放动画了 -->
         <h1>广西·思源模拟联合国大会</h1>
         <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
         <div class="tagline">
@@ -419,7 +325,7 @@
                         <div class="gallery-grid">
                             <div class="gallery-item">
                                 <img src="1stopen.jpg" alt="第一届开幕式" class="full-view-img">
-                                <span class="img-caption" style="top: auto; bottom: 8px;">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
                             </div>
                         </div>
                     </div>
@@ -461,7 +367,7 @@
                         <div class="gallery-grid">
                             <div class="gallery-item">
                                 <img src="2ndbigphoto.jpg" alt="第二届合照">
-                                <span class="img-caption">第二届大合照</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">第二届大合照</span>
                             </div>
                         </div>
                     </div>
@@ -511,15 +417,15 @@
                         <div class="gallery-grid">
                             <div class="gallery-item">
                                 <img src="3rdecosoc1.jpg" alt="中文常规会场剪影">
-                                <span class="img-caption">中文常规会场剪影</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">中文常规会场剪影</span>
                             </div>
                             <div class="gallery-item">
                                 <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
-                                <span class="img-caption">1787费城制宪会议现场</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">1787费城制宪会议现场</span>
                             </div>
                             <div class="gallery-item">
                                 <img src="award.jpg" alt="颁奖">
-                                <span class="img-caption">颁奖典礼</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">颁奖典礼</span>
                             </div>
                         </div>
                     </div>
@@ -527,7 +433,7 @@
             </div>
         </div>
 
-        <!-- 第四届 -->
+        <!-- ================= 第四届 (最终修正版) ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c4')">2025 第四届 广西·思源模拟联合国大会</h3>
             <span class="conf-meta">2025年8月 | 标准化与多元化</span>
@@ -575,30 +481,35 @@
                     <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看第四届精彩瞬间</span>
                     <div id="g4" class="gallery-container">
                         <div class="gallery-grid">
-                            <div class="gallery-item big-photo">
+                            <!-- 普通小图 1 -->
+                            <div class="gallery-item">
                                 <img src="4thgagp.jpg" alt="联大会场合影" class="full-view-img">
-                                <span class="img-caption">变化后的联大会场合影</span>
-                            </div>
-                            <div class="gallery-item big-photo">
-                                <img src="4thcndgp.jpg" alt="麻委会会场合影" class="full-view-img">
-                                <span class="img-caption" style="top: auto; bottom: 8px;">第四届会议现场</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">变化后的联大会场合影</span>
                             </div>
                             
+                            <!-- 普通小图 2 -->
+                            <div class="gallery-item">
+                                <img src="4thcndgp.jpg" alt="麻委会会场合影" class="full-view-img">
+                                <span class="img-caption" onclick="toggleCaption(this)">第四届会议现场</span>
+                            </div>
+                            
+                            <!-- 普通小图 3 -->
                             <div class="gallery-item">
                                 <img src="4thsfgp.jpg" alt="旧金山会场合影" class="full-view-img">
-                                <span class="img-caption">旧金山会场合影</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">旧金山会场合影</span>
                             </div>
                             
+                            <!-- 普通小图 4 -->
                             <div class="gallery-item">
                                 <img src="4thusgp.jpg" alt="第四届筹备人员合影" class="full-view-img">
-                                <span class="img-caption" style="top: auto; bottom: 8px;">第四届筹备人员合影</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">第四届筹备人员合影</span>
                             </div>
-                            <!-- 测试专用大图 -->
-                            <div style="width: 100%; margin-bottom: 20px; text-align: center; grid-column: 1 / -1;">
-                                <img src="shaoyanghezhao.jpg" alt="开幕式" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                                <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 8px 15px; margin-top: -45px; display: inline-block; border-radius: 4px; font-size: 14px; position: relative; z-index: 10;">
-                                    秘书长与邵阳二中代表团合影留念
-                                </div>
+                            
+                            <!-- 🌟 重点保留：邵阳合影 (大图模式) -->
+                            <!-- 添加 big-photo 类，强制独占一行 -->
+                            <div class="gallery-item big-photo">
+                                <img src="shaoyanghezhao.jpg" alt="开幕式" class="full-view-img">
+                                <span class="img-caption" onclick="toggleCaption(this)" style="top: auto; bottom: 10px; left: 10px; right: auto; max-width: 80%;">秘书长与邵阳二中代表团合影留念</span>
                             </div>
                         </div>
                     </div>
@@ -659,7 +570,7 @@
                         <div class="gallery-grid">
                             <div class="gallery-item">
                                 <img src="5thopen.jpg" alt="开幕式" class="full-view-img">
-                                <span class="img-caption" style="top: auto; bottom: 8px;">第五届开幕式大合影</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">第五届开幕式大合影</span>
                             </div>
                         </div>
                     </div>
@@ -758,6 +669,16 @@
     function toggleGallery(id) {
         const el = document.getElementById(id);
         el.classList.toggle('open');
+    }
+
+    // 🌟 新增：切换文字说明的展开/收起状态
+    function toggleCaption(element) {
+        // 切换 expanded 类
+        element.classList.toggle('expanded');
+        
+        // 可选：如果想点击其他地方关闭，可以在这里添加全局监听，
+        // 但为了简单和体验，目前设计为：再次点击关闭，或者鼠标移开自动关闭(CSS控制)
+        // 在手机上，点击一次展开，再点一次收起。
     }
 </script>
 
