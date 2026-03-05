@@ -65,9 +65,19 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        .hero-card h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: 2px; line-height: 1.2; position: relative; z-index: 1; }
-        .hero-card p.subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 300; position: relative; z-index: 1; }
-        .hero-card .tagline { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); position: relative; z-index: 1; }
+        .hero-card h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: 2px; line-height: 1.2; position: relative; z-index: 1; 
+                        opacity: 0; 
+                        animation: slideInFromTop 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;}
+        .hero-card p.subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 300; position: relative; 
+                                z-index: 1; 
+                                opacity: 0;
+                                transform: translateY(20px);
+                                animation: fadeInUp 1s ease-out 0.3s forwards;}
+        .hero-card .tagline { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); 
+                              position: relative;
+                              z-index: 1;
+                              opacity: 0;
+                              animation: fadeInSimple 0.8s ease-out 0.6s forwards;}
         .scroll-hint { display: block; margin-top: 3rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; cursor: pointer; animation: bounce 2s infinite; }
 
         /* 内容区域 */
@@ -297,6 +307,15 @@
 
         footer { text-align: center; padding: 2rem; background: var(--primary); color: rgba(255,255,255,0.7); font-size: 0.9rem; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes slideInFromTop { 
+            to { opacity: 1; transform: translateY(0); } 
+        }
+        @keyframes fadeInUp { 
+            to { opacity: 0.9; transform: translateY(0); } 
+        }
+        @keyframes fadeInSimple { 
+            to { opacity: 1; } 
+        }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
         @media (max-width: 600px) {
