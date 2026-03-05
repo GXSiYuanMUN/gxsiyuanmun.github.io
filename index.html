@@ -65,27 +65,9 @@
             border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* --- 动画样式 --- */
-        .hero-card h1 { 
-            font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: 2px; line-height: 1.2; position: relative; z-index: 1; 
-            opacity: 0; transform: translateY(-40px);
-            animation: slideInFromTop 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-        }
-        .hero-card p.subtitle { 
-            font-size: 1.2rem; opacity: 0; margin-bottom: 2rem; font-weight: 300; position: relative; z-index: 1; 
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease-out 0.3s forwards;
-        }
-        .hero-card .tagline { 
-            display: inline-block; background: rgba(255,255,255,0.2); padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); position: relative; z-index: 1; 
-            opacity: 0;
-            animation: fadeInSimple 0.8s ease-out 0.6s forwards;
-        }
-
-        @keyframes slideInFromTop { to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { to { opacity: 0.9; transform: translateY(0); } }
-        @keyframes fadeInSimple { to { opacity: 1; } }
-
+        .hero-card h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: 2px; line-height: 1.2; position: relative; z-index: 1; }
+        .hero-card p.subtitle { font-size: 1.2rem; opacity: 0.9; margin-bottom: 2rem; font-weight: 300; position: relative; z-index: 1; }
+        .hero-card .tagline { display: inline-block; background: rgba(255,255,255,0.2); padding: 0.8rem 2rem; border-radius: 50px; font-size: 1rem; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3); position: relative; z-index: 1; }
         .scroll-hint { display: block; margin-top: 3rem; color: rgba(255,255,255,0.6); font-size: 0.9rem; cursor: pointer; animation: bounce 2s infinite; }
 
         /* 内容区域 */
@@ -104,103 +86,152 @@
         section h2 { color: var(--primary); border-left: 5px solid var(--accent); padding-left: 1rem; margin-bottom: 1.5rem; font-size: 1.6rem; }
 
         /* --- 历届会议核心样式 --- */
-        .conference-item { margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
+        .conference-item { 
+            margin-bottom: 3rem; 
+            border-bottom: 1px solid #eee; 
+            padding-bottom: 2rem; 
+        }
         .conference-item:last-child { border-bottom: none; }
 
-        .conf-title { font-size: 1.5rem; color: var(--primary); cursor: pointer; display: inline-block; margin-bottom: 0.5rem; border-bottom: 2px solid transparent; transition: border-color 0.3s; font-weight: bold; }
+        .conf-title { 
+            font-size: 1.5rem; 
+            color: var(--primary); 
+            cursor: pointer; 
+            display: inline-block; 
+            margin-bottom: 0.5rem; 
+            border-bottom: 2px solid transparent; 
+            transition: border-color 0.3s; 
+            font-weight: bold;
+        }
         .conf-title:hover { border-bottom-color: var(--accent); color: var(--accent); }
-        .conf-meta { color: #666; font-size: 0.9rem; display: block; margin-bottom: 1rem; }
-        .conf-highlight { font-family: "KaiTi", "STKaiti", serif; font-weight: bold; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; color: var(--accent); display: block; margin: 1rem 0; line-height: 1.6; }
 
-        .gallery-container { max-height: 0; overflow: hidden; transition: all 0.5s ease; }
-        .gallery-container.open { max-height: 3000px; margin-top: 1rem; }
+        .conf-meta { 
+            color: #666; 
+            font-size: 0.9rem; 
+            display: block; 
+            margin-bottom: 1rem; 
+        }
 
-        .venue-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-top: 1.5rem; }
-        .venue-btn { background: #f0f4ff; color: var(--primary); border: 1px solid var(--accent); padding: 0.8rem 0.5rem; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-weight: 600; transition: all 0.3s; text-align: center; }
-        .venue-btn:hover { background: var(--accent); color: white; transform: translateY(-2px); box-shadow: 0 4px 8px rgba(45, 90, 155, 0.2); }
-        .venue-detail { margin-top: 10px; background: #fafafa; border-left: 3px solid var(--accent); padding: 1rem; border-radius: 0 8px 8px 0; font-size: 0.9rem; display: none; animation: fadeIn 0.4s ease; }
-        .venue-detail.active { display: block; }
-        .venue-detail strong { color: var(--primary); }
-        .venue-detail p { margin-bottom: 0.5rem; }
+        /* 高光时刻样式 */
+        .conf-highlight {
+            font-family: "KaiTi", "STKaiti", serif;
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+            color: var(--accent);
+            display: block;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
 
-        /* --- 画廊网格 (恢复三列布局) --- */
-        .gallery-grid {
+        .gallery-container { 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: all 0.5s ease; 
+        }
+        .gallery-container.open { 
+            max-height: 3000px; 
+            margin-top: 1rem; 
+        }
+
+        .venue-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
             gap: 12px;
             margin-top: 1.5rem;
         }
 
+        .venue-btn {
+            background: #f0f4ff;
+            color: var(--primary);
+            border: 1px solid var(--accent);
+            padding: 0.8rem 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        .venue-btn:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(45, 90, 155, 0.2);
+        }
+
+        .venue-detail {
+            margin-top: 10px;
+            background: #fafafa;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        .venue-detail.active { display: block; }
+        .venue-detail strong { color: var(--primary); }
+        .venue-detail p { margin-bottom: 0.5rem; }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
         .gallery-item {
             position: relative;
             border-radius: 6px;
             overflow: hidden;
             background: #eee;
-            aspect-ratio: 4/3; 
         }
-
         .gallery-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover; 
+            height: 120px;
+            object-fit: cover;
             display: block;
-            transition: transform 0.3s;
-            /* 🚀 优化：强制 GPU 合成，减少重绘卡顿 */
-            transform: translateZ(0); 
-            backface-visibility: hidden;
+            border-radius: 6px;
         }
-        
-        /* 🚀 优化：仅在非触摸设备（电脑）上启用悬停放大，手机端禁用以提升流畅度 */
-        @media (hover: hover) {
-            .gallery-item:hover img {
-                transform: scale(1.05); 
-            }
-        }
-
-        /* 全景大图特殊处理 */
+                 /* --- 专属：第一届全景大图模式 --- */
         .gallery-item img.full-view-img {
-            object-fit: contain; 
+            width: 100%;            /* 宽度强制占满格子 */
+            height: auto;           /* 高度完全由图片比例决定，不设上限 */
+            max-height: none;       /* 彻底解除高度限制，让它想多高就多高 */
+            object-fit: contain;    /* 确保内容完整显示，不裁剪 */
+            display: block;
+            border-radius: 6px;
             background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 加个阴影，让大图更突出 */
         }
-
-        /* --- 🌟 重点修改：可互动的文字标签 --- */
         .img-caption {
             position: absolute;
             top: 8px;
             right: 8px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.7);
             color: white;
             font-size: 0.75rem;
-            padding: 4px 10px;
+            padding: 4px 8px;
             border-radius: 4px;
-            pointer-events: auto; 
-            
-            max-width: 70%; 
+            pointer-events: none;
+            backdrop-filter: blur(2px);
+            max-width: 80%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            z-index: 10;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            /* 🚀 优化：移除手机端点击高亮背景 */
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* 悬停或点击 (激活) 时的状态 */
-        .img-caption:hover, 
-        .img-caption:active,
-        .img-caption.expanded {
-            max-width: 90%; 
-            background: rgba(0, 0, 0, 0.9);
-            padding-right: 12px;
-            white-space: normal; 
-            overflow: visible;
-            text-overflow: clip;
-            transform: translateX(-5px); 
+        .toggle-btn { 
+            display: inline-block; 
+            margin-top: 0.5rem; 
+            font-size: 0.85rem; 
+            color: var(--accent); 
+            border: 1px solid var(--accent); 
+            padding: 0.3rem 1rem; 
+            border-radius: 20px; 
+            cursor: pointer; 
         }
-
-        .toggle-btn { display: inline-block; margin-top: 0.5rem; font-size: 0.85rem; color: var(--accent); border: 1px solid var(--accent); padding: 0.3rem 1rem; border-radius: 20px; cursor: pointer; }
         .toggle-btn:hover { background: var(--accent); color: white; }
 
         ul, ol { margin-left: 1.5rem; margin-top: 1rem; }
@@ -217,9 +248,23 @@
             .hero-card { padding: 3rem 1.5rem; }
             nav a { display: block; margin: 0.5rem 0; }
             .venue-grid { grid-template-columns: 1fr 1fr; }
-            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-            .img-caption { font-size: 0.65rem; padding: 3px 6px; }
         }
+            /* --- 新增代码开始 --- */
+
+                / * 1. 让带有 "big-photo" 标记的盒子，强制独占一行（从第1列跨到最后一列） */
+            .gallery-item.big-photo {
+            grid-column: 1 / -1; 
+            width: 100%;
+            }
+
+            /* 2. 确保这个盒子里的图片也是宽宽的 */
+            .gallery-item.big-photo img {
+                width: 100%;
+                height: auto; /* 高度自动，保持比例 */
+                display: block;
+            }
+
+                /* --- 新增代码结束 --- */
     </style>
 </head>
 <body>
@@ -256,20 +301,20 @@
         <br>
         <p>我们秉持<strong>“学术本位”</strong>的核心理念，致力于将顶级大会的学术理念带回广西，为八桂学子搭建家门口的优质会议平台。在办会之余，我们还主持了<strong>《火种计划》</strong>，思源追求学术的步伐永不停歇。</p>
         <br>
-        <p> <strong>“志之所趋，无远弗届，穷山距海，不能限也”</strong>。在百年未有之大变局加速演进的当下，世界更加呼唤具有完备政治素质和全球视野的现代公民。而我国作为多边主义的笃定践行者、人类命运共同体的积极构建者和联合国权威的坚定维护者，亦更加需要兼具时代感知、全球视野与家国情怀的社会主义新时代青年。</p>
+        <p> <strong>“志之所趋，无远弗届，穷山距海，不能限也”。</strong>在百年未有之大变局加速演进的当下，世界更加呼唤具有完备政治素质和全球视野的现代公民。而我国作为多边主义的笃定践行者、人类命运共同体的积极构建者和联合国权威的坚定维护者，亦更加需要兼具时代感知、全球视野与家国情怀的社会主义新时代青年。</p>
         <br>
         <p> “千磨万击还坚劲，任尔东西南北风。”在这个不确定性日益弥漫的时代里，我们更需要回归理性与人本的精神，重新发现和发掘人与人的联结，构建由青年之声筑基的思辨学宫。广西·思源模联在此承诺：我们将继续致力于为各位提供这样的平台。</p>
         <div class="highlight">
-            <strong>“欲流之远者，必浚其泉源”</strong>。思源模联从未忘记“办惠及最广大学子的学术模联”的初心。我们将会议的学术设计视为广西·思源模联的生命，过去如此，现在如此，未来亦将继续锚定学术模联的目标，继续奋勇前进。
+            <strong>“欲流之远者，必浚其泉源”。</strong>思源模联从未忘记“办惠及最广大学子的学术模联”的初心。我们将会议的学术设计视为广西·思源模联的生命，过去如此，现在如此，未来亦将继续锚定学术模联的目标，继续奋勇前进。
         </div>
     </section>
 
-    <!-- 历届会议回顾 -->
+    <!-- 历届会议回顾 (已修复图片标签) -->
     <section id="history" class="animate-on-scroll">
         <h2>历届会议回顾</h2>
         <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.9rem;">点击会议名称查看会议亮点与历史坐标，点击具体会场了解详细信息。</p>
 
-        <!-- 第一届 (完全恢复原样 + 懒加载) -->
+        <!-- ================= 第一届 (2024) ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c1')">2024第一届思源模拟联合国大会</h3>
             <span class="conf-meta">2024年1月 | 梦开始的地方</span>
@@ -283,7 +328,7 @@
                     <div class="venue-wrapper">
                         <div class="venue-btn" onclick="toggleVenue(this)">会场一：GA1</div>
                         <div class="venue-detail">
-                            <p><strong>委员会：</strong>联合国大会·裁军与国际安全</p>
+                            <p><strong>委员会：</strong>联合国大会第一委员会·裁军与国际安全</p>
                             <p><strong>议题：</strong>巴以冲突背景下的国际安全形势</p>
                             <p><strong>规则：</strong>罗伯特议事规则</p>
                         </div>
@@ -302,9 +347,9 @@
                     <div id="g1" class="gallery-container">
                         <div class="gallery-grid">
                             <div class="gallery-item">
-                                <!-- 🚀 仅添加 loading="lazy"，其他完全不动 -->
-                                <img src="1stopen.jpg" alt="第一届开幕式" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
+                                <img src="1stopen.jpg" alt="第一届开幕式"
+                                class="full-view-img">
+                                <span class="img-caption"style="top: auto; bottom: 8px;">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
                             </div>
                         </div>
                     </div>
@@ -312,7 +357,7 @@
             </div>
         </div>
 
-        <!-- 第二届 -->
+        <!-- ================= 第二届 ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c2')">2024第二届思源模拟联合国大会</h3>
             <span class="conf-meta">2024年7月 | 乘风破浪</span>
@@ -345,8 +390,9 @@
                     <div id="g2" class="gallery-container">
                         <div class="gallery-grid">
                             <div class="gallery-item">
-                                <img src="2ndbigphoto.jpg" alt="第二届合照" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">第二届大合照</span>
+                                <!-- 注意：请确保上传了 2ndbigphoto.jpg -->
+                                <img src="2ndbigphoto.jpg" alt="第二届合照">
+                                <span class="img-caption">第二届大合照</span>
                             </div>
                         </div>
                     </div>
@@ -354,7 +400,7 @@
             </div>
         </div>
 
-        <!-- 第三届 -->
+        <!-- ================= 第三届 (2025 寒假) ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c3')">2025 第三届 广西·思源模拟联合国大会</h3>
             <span class="conf-meta">2025年1月 | 重大创新</span>
@@ -395,16 +441,16 @@
                     <div id="g3" class="gallery-container">
                         <div class="gallery-grid">
                             <div class="gallery-item">
-                                <img src="3rdecosoc1.jpg" alt="中文常规会场剪影" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">中文常规会场剪影</span>
+                                <img src="3rdecosoc1.jpg" alt="中文常规会场剪影">
+                                <span class="img-caption">中文常规会场剪影</span>
                             </div>
                             <div class="gallery-item">
-                                <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">1787费城制宪会议现场</span>
+                                <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
+                                <span class="img-caption">1787费城制宪会议现场</span>
                             </div>
                             <div class="gallery-item">
-                                <img src="award.jpg" alt="颁奖" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">颁奖典礼</span>
+                                <img src="award.jpg" alt="颁奖">
+                                <span class="img-caption">颁奖典礼</span>
                             </div>
                         </div>
                     </div>
@@ -412,7 +458,7 @@
             </div>
         </div>
 
-        <!-- ================= 第四届 (已修复布局 + 互动文字) ================= -->
+        <!-- ================= 第四届 (2025 暑假) [已修复图片标签] ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c4')">2025 第四届 广西·思源模拟联合国大会</h3>
             <span class="conf-meta">2025年8月 | 标准化与多元化</span>
@@ -460,29 +506,35 @@
                     <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看第四届精彩瞬间</span>
                     <div id="g4" class="gallery-container">
                         <div class="gallery-grid">
-                            <div class="gallery-item">
-                                <img src="4thgagp.jpg" alt="联大会场合影" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">变化后的联大会场合影</span>
+                            <!-- 修复：统一使用 class="img-caption"，文字放在标签内 -->
+                            <div class="gallery-item big-photo">
+                                <img src="4thgagp.jpg" alt="联大会场合影" class="full-view-img">
+                                <span class="img-caption">变化后的联大会场合影</span>
+                            </div>
+                            <!-- 第四届：大图模式 + 文字在底部 -->
+                            <div class="gallery-item big-photo">
+                                <img src="4thcndgp.jpg" alt="麻委会会场合影" class="full-view-img">
+                                <!-- 关键：文字沉底 -->
+                                <span class="img-caption" style="top: auto; bottom: 8px;">第四届会议现场</span>
                             </div>
                             
                             <div class="gallery-item">
-                                <img src="4thcndgp.jpg" alt="麻委会会场合影" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">第四届会议现场</span>
+                                <img src="4thsfgp.jpg" alt="旧金山会场合影" class="full-view-img">
+                                <span class="img-caption">旧金山会场合影</span>
                             </div>
                             
                             <div class="gallery-item">
-                                <img src="4thsfgp.jpg" alt="旧金山会场合影" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">旧金山会场合影</span>
+                                <img src="4thusgp.jpg" alt="第四届筹备人员合影" class="full-view-img">
+                                <span class="img-caption" style="top: auto; bottom: 8px;">第四届筹备人员合影</span>
                             </div>
-                            
-                            <div class="gallery-item">
-                                <img src="4thusgp.jpg" alt="第四届筹备人员合影" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">第四届筹备人员合影</span>
-                            </div>
-                            
-                            <div class="gallery-item">
-                                <img src="shaoyanghezhao.jpg" alt="开幕式" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">秘书长与邵阳二中代表团合影留念</span>
+                            <!-- 【测试专用】只修改这一张，看看效果 -->
+                            <div style="width: 100%; margin-bottom: 20px; text-align: center; grid-column: 1 / -1;">
+                                <img src="shaoyanghezhao.jpg" alt="开幕式" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                                
+                                <!-- 文字部分：半透明黑底，居中 -->
+                                <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 8px 15px; margin-top: -45px; display: inline-block; border-radius: 4px; font-size: 14px; position: relative; z-index: 10;">
+                                    秘书长与邵阳二中代表团合影留念
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -490,7 +542,7 @@
             </div>
         </div>
 
-        <!-- 第五届 -->
+        <!-- ================= 第五届 (2026 寒假) [已修复图片标签] ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c5')">2026 第五届 广西·思源模拟联合国大会</h3>
             <span class="conf-meta">2026年2月 | 继往开来</span>
@@ -541,9 +593,12 @@
                     <span class="toggle-btn" onclick="toggleGallery('g5')">✨ 查看第五届精彩瞬间</span>
                     <div id="g5" class="gallery-container">
                         <div class="gallery-grid">
+                            <!-- 修复：统一使用 class="img-caption" -->
+
                             <div class="gallery-item">
-                                <img src="5thopen.jpg" alt="开幕式" class="full-view-img" loading="lazy">
-                                <span class="img-caption" onclick="toggleCaption(this)">第五届开幕式大合影</span>
+                                <img src="5thopen.jpg" alt="开幕式" class="full-view-img">
+                                <!-- 修改点：增加了 text-align: center; 和 width: 100%; -->
+                                <span class="img-caption"style="top: auto; bottom: 8px;">第五届开幕式大合影</span>
                             </div>
                         </div>
                     </div>
@@ -598,7 +653,6 @@
 </footer>
 
 <script>
-    // 页面滚动动画观察器
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -609,7 +663,6 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('.animate-on-scroll').forEach(sec => observer.observe(sec));
 
-    // 切换会议详情
     function toggleConference(id) {
         const el = document.getElementById(id);
         const isOpen = el.classList.contains('open');
@@ -621,7 +674,6 @@
         if (!isOpen) el.classList.add('open');
     }
 
-    // 切换会场详情
     function toggleVenue(btn) {
         const detail = btn.nextElementSibling;
         const isActive = detail.classList.contains('active');
@@ -638,15 +690,9 @@
         }
     }
 
-    // 切换图片画廊
     function toggleGallery(id) {
         const el = document.getElementById(id);
         el.classList.toggle('open');
-    }
-
-    // 切换文字说明
-    function toggleCaption(element) {
-        element.classList.toggle('expanded');
     }
 </script>
 
