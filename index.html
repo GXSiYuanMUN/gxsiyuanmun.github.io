@@ -112,7 +112,6 @@
             margin-bottom: 1rem; 
         }
 
-        /* 高光时刻样式 */
         .conf-highlight {
             font-family: "KaiTi", "STKaiti", serif;
             font-weight: bold;
@@ -186,44 +185,53 @@
         .gallery-item {
             position: relative;
             border-radius: 6px;
-            overflow: hidden; /* 防止圆角溢出 */
+            overflow: hidden;
             background: #eee;
+            /* 默认无固定高度，由内部图片决定，或者由下面的类决定 */
         }
 
-        /* 默认图片样式：小图模式 (裁剪填满) */
+        /* --- 1. 默认小图样式 (用于普通缩略图) --- */
         .gallery-item img {
             width: 100%;
             height: 120px; /* 固定高度，形成整齐网格 */
             object-fit: cover; /* 裁剪以适应 */
             display: block;
             border-radius: 6px;
+            transition: transform 0.5s ease; /* ✅ 保留动画：悬停放大 */
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05); /* ✅ 保留动画：悬停放大效果 */
         }
 
-        /* --- 🚨 关键修改：第一届全景大图模式 (完整显示，绝不裁剪) --- */
-        .gallery-item img.full-view-img {
-            width: 100%;            /* 宽度占满 */
-            height: auto;           /* 高度自动，保持原始比例 */
-            max-height: none;       /* 解除高度限制 */
-            object-fit: contain;    /* 【核心】确保图片完整显示，两边不裁切 */
-            display: block;
-            border-radius: 6px;
-            background-color: #f9f9f9; /* 背景色防止透明图尴尬 */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        /* --- 🌟 专属：邵阳合影等大图独占一行模式 --- */
-        .gallery-item.big-photo {
-            grid-column: 1 / -1; /* 强制独占一行 */
+        /* --- 2. 【关键修复】全景大图样式 (第一届、第二届等需要完整显示的图) --- */
+        /* 应用于需要完整显示的图片容器 */
+        .gallery-item.full-width-item {
+            grid-column: 1 / -1; /* 独占一行 */
             width: 100%;
         }
+
+        /* 应用于需要完整显示的图片本身 */
+        .gallery-item.full-width-item img,
         .gallery-item.big-photo img {
             width: 100%;
-            height: auto; 
-            object-fit: contain; /* 大图也建议完整显示，或者你用 cover 看需求 */
+            height: auto;       /* ✅ 高度自动，保持原始比例 */
+            max-height: none;   /* ✅ 解除高度限制 */
+            object-fit: contain;/* ✅ 核心：确保图片完整显示，左右绝不裁剪 */
             display: block;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            /* ✅ 依然保留悬停放大动画 */
+            transition: transform 0.5s ease; 
+        }
+        
+        .gallery-item.full-width-item:hover img,
+        .gallery-item.big-photo:hover img {
+            transform: scale(1.02); /* 大图悬停轻微放大 */
         }
 
-        /* --- 📝 重点修改：文字标签瘦身版 (参照你的代码) --- */
+        /* --- 3. 文字标签样式 (完全照搬你的代码风格，但保留交互逻辑) --- */
         .img-caption {
             position: absolute;
             top: 8px;
@@ -233,16 +241,37 @@
             font-size: 0.75rem;              /* 小字体 */
             padding: 4px 8px;                /* 小内边距 */
             border-radius: 4px;
-            pointer-events: none;            /* 鼠标事件穿透，不影响点击图片 */
+            pointer-events: auto;            /* ✅ 允许点击，为了交互 */
             backdrop-filter: blur(2px);      /* 轻微毛玻璃 */
-            max-width: 80%;                  /* 限制最大宽度 */
-            white-space: nowrap;             /* 不换行 */
+            max-width: 60%;                  /* 限制最大宽度 */
+            white-space: nowrap;             /* 默认不换行 */
             overflow: hidden;                /* 超出隐藏 */
             text-overflow: ellipsis;         /* 显示省略号 */
             z-index: 10;
+            cursor: pointer;                 /* 提示可点击 */
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* ✅ 保留展开动画 */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        
-        /* 特殊处理：如果文字需要沉底（如某些大图），可加类名或内联样式 */
+
+        /* ✅ 交互状态：点击或悬停时展开 */
+        .img-caption:hover, 
+        .img-caption:active,
+        .img-caption.expanded {
+            max-width: 90%;      /* 展开后变宽 */
+            background: rgba(0, 0, 0, 0.95);
+            padding: 8px 12px;
+            white-space: normal; /* 允许换行 */
+            overflow: visible;
+            text-overflow: clip;
+            transform: translateX(-5px) translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            z-index: 20;
+        }
+
+        /* 特殊位置修饰类 */
         .img-caption.bottom {
             top: auto;
             bottom: 8px;
@@ -257,6 +286,7 @@
             padding: 0.3rem 1rem; 
             border-radius: 20px; 
             cursor: pointer; 
+            transition: all 0.3s;
         }
         .toggle-btn:hover { background: var(--accent); color: white; }
 
@@ -324,7 +354,7 @@
         <h2>历届会议回顾</h2>
         <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.9rem;">点击会议名称查看会议亮点与历史坐标，点击具体会场了解详细信息。</p>
 
-        <!-- ================= 第一届 (2024) - 【重点保护对象】 ================= -->
+        <!-- ================= 第一届 (2024) - 【重点保护：完整画幅 + 保留动画】 ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c1')">2024第一届思源模拟联合国大会</h3>
             <span class="conf-meta">2024年1月 | 梦开始的地方</span>
@@ -356,11 +386,11 @@
                     <span class="toggle-btn" onclick="toggleGallery('g1')">✨ 查看第一届精彩瞬间</span>
                     <div id="g1" class="gallery-container">
                         <div class="gallery-grid">
-                            <!-- 🚨 关键：使用 full-view-img 类，确保大领导完整显示，绝不裁剪！ -->
-                            <div class="gallery-item" style="grid-column: 1 / -1;">
-                                <img src="1stopen.jpg" alt="第一届开幕式" class="full-view-img">
-                                <!-- 文字标签：瘦身版，沉底显示 -->
-                                <span class="img-caption bottom">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
+                            <!-- ✅ 关键修改：添加 full-width-item 类，确保完整显示且保留动画 -->
+                            <div class="gallery-item full-width-item">
+                                <img src="1stopen.jpg" alt="第一届开幕式">
+                                <!-- ✅ 文字标签：保留点击展开动画，样式照搬你的代码 -->
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
                             </div>
                         </div>
                     </div>
@@ -368,7 +398,7 @@
             </div>
         </div>
 
-        <!-- ================= 第二届 ================= -->
+        <!-- ================= 第二届 - 【修复：完整显示 + 保留动画】 ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c2')">2024第二届思源模拟联合国大会</h3>
             <span class="conf-meta">2024年7月 | 乘风破浪</span>
@@ -400,9 +430,10 @@
                     <span class="toggle-btn" onclick="toggleGallery('g2')">✨ 查看第二届精彩瞬间</span>
                     <div id="g2" class="gallery-container">
                         <div class="gallery-grid">
-                            <div class="gallery-item">
+                            <!-- ✅ 修复：添加 full-width-item 类，确保第二届合照也完整显示 -->
+                            <div class="gallery-item full-width-item">
                                 <img src="2ndbigphoto.jpg" alt="第二届合照">
-                                <span class="img-caption">第二届大合照</span>
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">第二届大合照</span>
                             </div>
                         </div>
                     </div>
@@ -452,15 +483,15 @@
                         <div class="gallery-grid">
                             <div class="gallery-item">
                                 <img src="3rdecosoc1.jpg" alt="中文常规会场剪影">
-                                <span class="img-caption">中文常规会场剪影</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">中文常规会场剪影</span>
                             </div>
                             <div class="gallery-item">
                                 <img src="d12902b23f1a152c55a148a24538f4cc.jpg" alt="历史会场剪影">
-                                <span class="img-caption">1787费城制宪会议现场</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">1787费城制宪会议现场</span>
                             </div>
                             <div class="gallery-item">
                                 <img src="award.jpg" alt="颁奖">
-                                <span class="img-caption">颁奖典礼</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">颁奖典礼</span>
                             </div>
                         </div>
                     </div>
@@ -468,7 +499,7 @@
             </div>
         </div>
 
-        <!-- ================= 第四届 (2025 暑假) ================= -->
+        <!-- ================= 第四届 ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c4')">2025 第四届 广西·思源模拟联合国大会</h3>
             <span class="conf-meta">2025年8月 | 标准化与多元化</span>
@@ -516,31 +547,31 @@
                     <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看第四届精彩瞬间</span>
                     <div id="g4" class="gallery-container">
                         <div class="gallery-grid">
-                            <!-- 大图模式：独占一行 -->
+                            <!-- 大图模式：独占一行，完整显示 -->
                             <div class="gallery-item big-photo">
-                                <img src="4thgagp.jpg" alt="联大会场合影" class="full-view-img">
-                                <span class="img-caption bottom">变化后的联大会场合影</span>
+                                <img src="4thgagp.jpg" alt="联大会场合影">
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">变化后的联大会场合影</span>
                             </div>
                             
                             <div class="gallery-item big-photo">
-                                <img src="4thcndgp.jpg" alt="麻委会会场合影" class="full-view-img">
-                                <span class="img-caption bottom">第四届会议现场</span>
+                                <img src="4thcndgp.jpg" alt="麻委会会场合影">
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">第四届会议现场</span>
                             </div>
                             
                             <div class="gallery-item">
                                 <img src="4thsfgp.jpg" alt="旧金山会场合影">
-                                <span class="img-caption">旧金山会场合影</span>
+                                <span class="img-caption" onclick="toggleCaption(this)">旧金山会场合影</span>
                             </div>
                             
                             <div class="gallery-item">
                                 <img src="4thusgp.jpg" alt="第四届筹备人员合影">
-                                <span class="img-caption bottom">第四届筹备人员合影</span>
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">第四届筹备人员合影</span>
                             </div>
                             
-                            <!-- 邵阳合影：超级大图，独占一行 -->
+                            <!-- 邵阳合影：超级大图 -->
                             <div class="gallery-item big-photo">
-                                <img src="shaoyanghezhao.jpg" alt="开幕式" class="full-view-img">
-                                <span class="img-caption bottom">秘书长与邵阳二中代表团合影留念</span>
+                                <img src="shaoyanghezhao.jpg" alt="开幕式">
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">秘书长与邵阳二中代表团合影留念</span>
                             </div>
                         </div>
                     </div>
@@ -599,9 +630,10 @@
                     <span class="toggle-btn" onclick="toggleGallery('g5')">✨ 查看第五届精彩瞬间</span>
                     <div id="g5" class="gallery-container">
                         <div class="gallery-grid">
-                            <div class="gallery-item" style="grid-column: 1 / -1;">
-                                <img src="5thopen.jpg" alt="开幕式" class="full-view-img">
-                                <span class="img-caption bottom">第五届开幕式大合影</span>
+                            <!-- 第五届大图 -->
+                            <div class="gallery-item full-width-item">
+                                <img src="5thopen.jpg" alt="开幕式">
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">第五届开幕式大合影</span>
                             </div>
                         </div>
                     </div>
@@ -700,6 +732,11 @@
     function toggleGallery(id) {
         const el = document.getElementById(id);
         el.classList.toggle('open');
+    }
+
+    // ✅ 核心功能：切换文字说明的展开/收起状态 (保留动画效果)
+    function toggleCaption(element) {
+        element.classList.toggle('expanded');
     }
 </script>
 
