@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>广西·思源模拟联合国大会手机版 | SYMUN</title>
+    <title>广西·思源模拟联合国大会 | SYMUN</title>
     <style>
         :root {
             --primary: #1a2a40;
@@ -13,7 +13,7 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: "Microsoft YaHei", sans-serif; }
         html { scroll-behavior: smooth; }
-        
+
         body {
             background-color: var(--bg);
             color: var(--text);
@@ -194,17 +194,6 @@
             display: block;
             border-radius: 6px;
         }
-                 /* --- 专属：第一届全景大图模式 --- */
-        .gallery-item img.full-view-img {
-            width: 100%;            /* 宽度强制占满格子 */
-            height: auto;           /* 高度完全由图片比例决定，不设上限 */
-            max-height: none;       /* 彻底解除高度限制，让它想多高就多高 */
-            object-fit: contain;    /* 确保内容完整显示，不裁剪 */
-            display: block;
-            border-radius: 6px;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 加个阴影，让大图更突出 */
-        }
         .img-caption {
             position: absolute;
             top: 8px;
@@ -249,22 +238,6 @@
             nav a { display: block; margin: 0.5rem 0; }
             .venue-grid { grid-template-columns: 1fr 1fr; }
         }
-            /* --- 新增代码开始 --- */
-
-                / * 1. 让带有 "big-photo" 标记的盒子，强制独占一行（从第1列跨到最后一列） */
-            .gallery-item.big-photo {
-            grid-column: 1 / -1; 
-            width: 100%;
-            }
-
-            /* 2. 确保这个盒子里的图片也是宽宽的 */
-            .gallery-item.big-photo img {
-                width: 100%;
-                height: auto; /* 高度自动，保持比例 */
-                display: block;
-            }
-
-                /* --- 新增代码结束 --- */
     </style>
 </head>
 <body>
@@ -281,7 +254,7 @@
 <!-- 首页 -->
 <div id="home" class="animate-on-scroll">
     <div class="hero-card">
-        <h1>广西·思源模拟联合国大会</h1>
+        <h1>广西·思源模拟联合国大会手机版</h1>
         <p class="subtitle">GUANGXI SIYUAN MODEL UNITED NATIONS</p>
         <div class="tagline">
             学术本位 · 立足广西 · 胸怀世界<br>
@@ -297,36 +270,32 @@
 
     <section id="about" class="animate-on-scroll">
         <h2>关于我们</h2>
-        <p>广西·思源模拟联合国大会（GXSYMUN），是由现已毕业的<strong>柳州铁一中学模拟联合国社团</strong>优秀成员创立，并由<strong>共青团柳州铁一中学委员会</strong>指导的模拟联合国会议平台。</p>
+        <p>广西·思源模拟联合国大会（SYMUN），是由现已毕业的<strong>柳州铁一中学模拟联合国社团</strong>优秀成员创立，并由<strong>共青团柳州铁一中学委员会</strong>指导的模拟联合国会议平台。</p>
         <br>
-        <p>我们秉持<strong>“学术本位”</strong>的核心理念，致力于将顶级大会的学术理念带回广西，为八桂学子搭建家门口的优质会议平台。在办会之余，我们还主持了<strong>《火种计划》</strong>，思源追求学术的步伐永不停歇。</p>
-        <br>
-        <p> <strong>“志之所趋，无远弗届，穷山距海，不能限也”。</strong>在百年未有之大变局加速演进的当下，世界更加呼唤具有完备政治素质和全球视野的现代公民。而我国作为多边主义的笃定践行者、人类命运共同体的积极构建者和联合国权威的坚定维护者，亦更加需要兼具时代感知、全球视野与家国情怀的社会主义新时代青年。</p>
-        <br>
-        <p> “千磨万击还坚劲，任尔东西南北风。”在这个不确定性日益弥漫的时代里，我们更需要回归理性与人本的精神，重新发现和发掘人与人的联结，构建由青年之声筑基的思辨学宫。广西·思源模联在此承诺：我们将继续致力于为各位提供这样的平台。</p>
+        <p>我们秉持<strong>“学术本位”</strong>的核心理念，致力于将顶级大会的学术理念带回广西。在办会之余，我们还主持了<strong>《火种计划》</strong>，追求学术的步伐永不停歇。</p>
         <div class="highlight">
-            <strong>“欲流之远者，必浚其泉源”。</strong>思源模联从未忘记“办惠及最广大学子的学术模联”的初心。我们将会议的学术设计视为广西·思源模联的生命，过去如此，现在如此，未来亦将继续锚定学术模联的目标，继续奋勇前进。
+            “欲流之远者，必浚其泉源”。广西·思源从未忘记初心。
         </div>
     </section>
 
-    <!-- 历届会议回顾 (已修复图片标签) -->
+    <!-- 历届会议回顾 (严格基于文件修正版) -->
     <section id="history" class="animate-on-scroll">
         <h2>历届会议回顾</h2>
-        <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.9rem;">点击会议名称查看会议亮点与历史坐标，点击具体会场了解详细信息。</p>
+        <p style="margin-bottom: 1.5rem; color: #666; font-size: 0.9rem;">点击届数查看高光时刻与会场，点击具体会场查看详细议题。</p>
 
         <!-- ================= 第一届 (2024) ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c1')">2024第一届思源模拟联合国大会</h3>
-            <span class="conf-meta">2024年1月 | 梦开始的地方</span>
-            
+            <span class="conf-meta">2024年1月| 梦开始的地方</span>
+
             <div id="c1" class="gallery-container">
                 <span class="conf-highlight">
-                    思源模联正式创立（后定名为“广西·思源模联”），提出“学术本位”核心理念，成功举办首届会议，为八桂学子搭建起家门口的模联平台。
+                    广西·思源模联正式创立，首次提出“学术本位”核心理念，成功举办首届会议，为八桂学子搭建起家门口的模联平台。
                 </span>
 
                 <div class="venue-grid">
                     <div class="venue-wrapper">
-                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：GA1</div>
+                        <div class="venue-btn" onclick="toggleVenue(this)">会场一：UNEP</div>
                         <div class="venue-detail">
                             <p><strong>委员会：</strong>联合国大会第一委员会·裁军与国际安全</p>
                             <p><strong>议题：</strong>巴以冲突背景下的国际安全形势</p>
@@ -347,9 +316,8 @@
                     <div id="g1" class="gallery-container">
                         <div class="gallery-grid">
                             <div class="gallery-item">
-                                <img src="1stopen.jpg" alt="第一届开幕式"
-                                class="full-view-img">
-                                <span class="img-caption"style="top: auto; bottom: 8px;">时任柳铁一中校长龙玫女士莅临开幕式并与参会人员合影留念</span>
+                                <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=SYMUN+1st" alt="第一届现场">
+                                <span class="img-caption">第一届会议现场</span>
                             </div>
                         </div>
                     </div>
@@ -360,8 +328,8 @@
         <!-- ================= 第二届 ================= -->
         <div class="conference-item">
             <h3 class="conf-title" onclick="toggleConference('c2')">2024第二届思源模拟联合国大会</h3>
-            <span class="conf-meta">2024年7月 | 乘风破浪</span>
-            
+            <span class="conf-meta">2024-2025 | 乘风破浪</span>
+
             <div id="c2" class="gallery-container">
                 <span class="conf-highlight">
                     “思源”成功实现寒暑假连续办会
@@ -390,9 +358,10 @@
                     <div id="g2" class="gallery-container">
                         <div class="gallery-grid">
                             <div class="gallery-item">
-                                <!-- 注意：请确保上传了 2ndbigphoto.jpg -->
-                                <img src="2ndbigphoto.jpg" alt="第二届合照">
-                                <span class="img-caption">第二届大合照</span>
+                                <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+2nd" alt="第二届现场">
+                                <span class="img-caption">第二届会议现场</span>
+                                <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+2nd" alt="第二届合照">
+                                <span class="2ndbigphoto.jpg">第二届大合照</span>
                             </div>
                         </div>
                     </div>
@@ -402,12 +371,12 @@
 
         <!-- ================= 第三届 (2025 寒假) ================= -->
         <div class="conference-item">
-            <h3 class="conf-title" onclick="toggleConference('c3')">2025 第三届 广西·思源模拟联合国大会</h3>
+            <h3 class="conf-title" onclick="toggleConference('c3')">第三届广西·思源模联 · 2025 (寒假)</h3>
             <span class="conf-meta">2025年1月 | 重大创新</span>
-            
+
             <div id="c3" class="gallery-container">
                 <span class="conf-highlight">
-                    开创思源史上第一个历史会场（1787费城制宪会议），首次实现除MPC外双会场平稳运行，本土历史会场成为思源的新名片。
+                    开创思源史上第一个历史会场（1787费城制宪会议），首次实现双会场平稳运行，本土历史会场成为思源的新名片。
                 </span>
 
                 <div class="venue-grid">
@@ -458,14 +427,14 @@
             </div>
         </div>
 
-        <!-- ================= 第四届 (2025 暑假) [已修复图片标签] ================= -->
+        <!-- ================= 第四届 (2025 暑假) ================= -->
         <div class="conference-item">
-            <h3 class="conf-title" onclick="toggleConference('c4')">2025 第四届 广西·思源模拟联合国大会</h3>
+            <h3 class="conf-title" onclick="toggleConference('c4')">第四届广西·思源模联 · 2025</h3>
             <span class="conf-meta">2025年8月 | 标准化与多元化</span>
-            
+
             <div id="c4" class="gallery-container">
                 <span class="conf-highlight">
-                    首次实现区外学团招募全流程标准化运行，实现MPC外三会场平稳运行。
+                    首次实现区外学团招募全流程标准化运行，设有旧金山会议、联合国麻醉药品委员会、联大非正式会议和主新闻中心四个委员会。
                 </span>
 
                 <div class="venue-grid">
@@ -506,35 +475,14 @@
                     <span class="toggle-btn" onclick="toggleGallery('g4')">✨ 查看第四届精彩瞬间</span>
                     <div id="g4" class="gallery-container">
                         <div class="gallery-grid">
-                            <!-- 修复：统一使用 class="img-caption"，文字放在标签内 -->
-                            <div class="gallery-item big-photo">
-                                <img src="4thgagp.jpg" alt="联大会场合影" class="full-view-img">
-                                <span class="img-caption">变化后的联大会场合影</span>
-                            </div>
-                            <!-- 第四届：大图模式 + 文字在底部 -->
-                            <div class="gallery-item big-photo">
-                                <img src="4thcndgp.jpg" alt="麻委会会场合影" class="full-view-img">
-                                <!-- 关键：文字沉底 -->
-                                <span class="img-caption" style="top: auto; bottom: 8px;">第四届会议现场</span>
-                            </div>
-                            
                             <div class="gallery-item">
-                                <img src="4thsfgp.jpg" alt="旧金山会场合影" class="full-view-img">
-                                <span class="img-caption">旧金山会场合影</span>
+                                <img src="https://via.placeholder.com/400x300/2d5a9b/fff?text=SYMUN+4th+1" alt="第四届图1">
+                                <span class="img-caption">待更新</span>
                             </div>
-                            
                             <div class="gallery-item">
-                                <img src="4thusgp.jpg" alt="第四届筹备人员合影" class="full-view-img">
-                                <span class="img-caption" style="top: auto; bottom: 8px;">第四届筹备人员合影</span>
-                            </div>
-                            <!-- 【测试专用】只修改这一张，看看效果 -->
-                            <div style="width: 100%; margin-bottom: 20px; text-align: center; grid-column: 1 / -1;">
-                                <img src="shaoyanghezhao.jpg" alt="开幕式" style="width: 100%; height: auto; display: block; border-radius: 6px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-                                
-                                <!-- 文字部分：半透明黑底，居中 -->
-                                <div style="background-color: rgba(0, 0, 0, 0.7); color: white; padding: 8px 15px; margin-top: -45px; display: inline-block; border-radius: 4px; font-size: 14px; position: relative; z-index: 10;">
-                                    秘书长与邵阳二中代表团合影留念
-                                </div>
+                                <img src="https://via.placeholder.com/400x300/1a2a40/fff?text=SYMUN+4th+2" alt="第四届图2">
+                                <span class="img-caption">待更新</span>
+                                <span class="shaoyanghezhao.jpg">秘书长和邵阳二中代表团合影留念</span>
                             </div>
                         </div>
                     </div>
@@ -542,17 +490,18 @@
             </div>
         </div>
 
-        <!-- ================= 第五届 (2026 寒假) [已修复图片标签] ================= -->
+        <!-- ================= 第五届 (2026 寒假) [已严格修正] ================= -->
         <div class="conference-item">
-            <h3 class="conf-title" onclick="toggleConference('c5')">2026 第五届 广西·思源模拟联合国大会</h3>
+            <h3 class="conf-title" onclick="toggleConference('c5')">第五届广西·思源模联 · 2026</h3>
             <span class="conf-meta">2026年2月 | 继往开来</span>
-            
+
             <div id="c5" class="gallery-container">
                 <span class="conf-highlight">
                     本地高中生会场主席团培养计划取得阶段性成果，成功与广西区内的更多学校建立外联关系
                 </span>
 
                 <div class="venue-grid">
+                    <!-- 会场一：万隆会议 -->
                     <div class="venue-wrapper">
                         <div class="venue-btn" onclick="toggleVenue(this)">会场一：万隆会议</div>
                         <div class="venue-detail">
@@ -561,7 +510,8 @@
                             <p><strong>规则：</strong>修改后的罗伯特议事规则</p>
                         </div>
                     </div>
-                    
+
+                    <!-- 会场二：ECOSOC -->
                     <div class="venue-wrapper">
                         <div class="venue-btn" onclick="toggleVenue(this)">会场二：ECOSOC</div>
                         <div class="venue-detail">
@@ -571,8 +521,9 @@
                         </div>
                     </div>
 
+                    <!-- 会场三：UNDP 执委会 -->
                     <div class="venue-wrapper">
-                        <div class="venue-btn" onclick="toggleVenue(this)">会场三：联开署执行局</div>
+                        <div class="venue-btn" onclick="toggleVenue(this)">联开署执行局</div>
                         <div class="venue-detail">
                             <p><strong>委员会：</strong>联合国开发计划署执行局 (UNDP Executive Board)</p>
                             <p><strong>议题：</strong>推动全球能源转型革命</p>
@@ -580,6 +531,7 @@
                         </div>
                     </div>
 
+                    <!-- 会场四：MPC (无议题项) -->
                     <div class="venue-wrapper">
                         <div class="venue-btn" onclick="toggleVenue(this)">会场四：MPC</div>
                         <div class="venue-detail">
@@ -593,12 +545,11 @@
                     <span class="toggle-btn" onclick="toggleGallery('g5')">✨ 查看第五届精彩瞬间</span>
                     <div id="g5" class="gallery-container">
                         <div class="gallery-grid">
-                            <!-- 修复：统一使用 class="img-caption" -->
-
                             <div class="gallery-item">
-                                <img src="5thopen.jpg" alt="开幕式" class="full-view-img">
-                                <!-- 修改点：增加了 text-align: center; 和 width: 100%; -->
-                                <span class="img-caption"style="top: auto; bottom: 8px;">第五届开幕式大合影</span>
+                                <img src="https://via.placeholder.com/400x300/3a6bb5/fff?text=SYMUN+5th" alt="第五届预告">
+                                <span class="img-caption">蓄势待发</span>
+                                <img src="5thopen.jpg" alt="开幕式">
+                                <span class="img-caption">开幕式大合影</span>
                             </div>
                         </div>
                     </div>
@@ -610,13 +561,11 @@
 
     <section id="academic" class="animate-on-scroll">
         <h2>学术体系</h2>
-        <p>坚持“学术本位”，严格把控各届各会场的会议设计</p>
-        <p>为每一位代表提供从基础议事规则（罗伯特议事规则）到文件写作再到危机应对的学术培训。</p>
+        <p>坚持“学术本位”，提供从基础规则到危机应对的全方位培训。</p>
         <ul>
-            <li>✅ 模拟联合国基础议事规则规则 </li>
-            <li>✅ 立场文件与决议文件写作</li>
+            <li>✅ 模拟联合国基础规则 (RONA)</li>
+            <li>✅ 立场文件与决议稿写作</li>
             <li>✅ 《火种计划》学术资源</li>
-            <li>✅ 本地高中生主席团全流程培养计划</li>
         </ul>
     </section>
 
@@ -625,7 +574,7 @@
         <ol>
             <li>关注官方通知 (公众号/社群)</li>
             <li>填写在线报名表单</li>
-            <li>缴费成功后进入参会人员总群</li>
+            <li>缴费并入群接收资料</li>
         </ol>
     </section>
 
@@ -633,7 +582,6 @@
         <h2>联系我们</h2>
         <ul>
             <li>📱 公众号：SY 思源模联</li>
-            <li>💬 官方QQ：2624717701</li>
             <li>💬 官方 QQ 社群：131055043</li>
             <li>📧 邮箱：siyuanmolian@126.com</li>
         </ul>
@@ -682,7 +630,7 @@
             b.style.background = '#f0f4ff';
             b.style.color = 'var(--primary)';
         });
-        
+
         if (!isActive) {
             detail.classList.add('active');
             btn.style.background = 'var(--accent)';
