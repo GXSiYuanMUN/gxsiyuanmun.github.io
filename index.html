@@ -308,15 +308,17 @@
         footer { text-align: center; padding: 2rem; background: var(--primary); color: rgba(255,255,255,0.7); font-size: 0.9rem; }
         @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         @keyframes dropDown { 
-            from { 
+            0% { 
                 opacity: 0; 
-                transform: translateY(-50px); /* 从上方 50px 处开始 */
+                transform: translateY(-60px); /* 起始位置更高一点，增加落差感 */
             } 
-            to { 
-                opacity: 1; 
-                transform: translateY(0); /* 落到原位 */
+            60% { 
+                opacity: 0; /* 👈 关键：前 60% 的行程完全隐藏，制造“隐形下落” */
+                transform: translateY(10px); /* 此时已经落过终点，准备回弹 */
             } 
-        }
+            100% { 
+        opacity: 1; /* 👈 关键：最后阶段才逐渐显现 */
+        transform: translateY(0);
         @keyframes fadeInUp { 
             to { opacity: 0.9; transform: translateY(0); } 
         }
