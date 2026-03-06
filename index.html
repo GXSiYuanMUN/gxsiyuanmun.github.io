@@ -343,17 +343,17 @@
         @keyframes dropDown { 
             0% { 
                 opacity: 0; 
-                transform: translateY(-60px); 
+                transform: translateY(-80px); /* 起点更高，增加落差感 */
             } 
             60% { 
-                opacity: 0; /* 前 60% 行程隐藏 */
-                transform: translateY(10px); /* 落过终点准备回弹 */
+                opacity: 0; /* 前 70% 全程隐藏，让用户感觉不到它在动 */
+                transform: translateY(-10px); /* 👈 关键修改：此时它还在原位【上方】10px 处，准备最后冲刺 */
             } 
             100% { 
-                opacity: 1; /* 最后阶段显现 */
-                transform: translateY(0); 
+                opacity: 1; 
+                transform: translateY(0); /* 最终落定在原位 */
             } 
-        } /* 👈 这里之前缺失了闭合括号 */
+        }
 
         @keyframes fadeInUp { 
             to { opacity: 0.9; transform: translateY(0); } 
@@ -557,7 +557,7 @@
                             </div>
                             <div class="gallery-item">
                                 <img src="3thzxtgp.jpg" alt="颁奖">
-                                <span class="img-caption" onclick="toggleCaption(this)">第三届筹备人员合影</span>
+                                <span class="img-caption bottom" onclick="toggleCaption(this)">第三届筹备人员合影</span>
                             </div>
                         </div>
                     </div>
