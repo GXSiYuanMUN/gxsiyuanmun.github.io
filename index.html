@@ -67,14 +67,14 @@
 
         /* ✅ 修复：应用落下式渐变动画 */
         .hero-card h1 { 
-            font-size: 2.8rem; 
+            font-size: 3.2rem; /*字号*/
             margin-bottom: 1rem; 
-            letter-spacing: 2px; 
+            letter-spacing: 4px; /* 增大字间距，显稳重 */
             line-height: 1.2; 
             position: relative; 
             z-index: 1; 
             opacity: 0; /* 初始隐藏 */
-            animation: dropDown 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            animation: dropDown 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
 
         .hero-card p.subtitle { 
@@ -343,15 +343,15 @@
         @keyframes dropDown { 
             0% { 
                 opacity: 0; 
-                transform: translateY(-80px); /* 起点更高，增加落差感 */
+                transform: translateY(-100px); /* 起点高 */
             } 
-            60% { 
-                opacity: 0; /* 前 70% 全程隐藏，让用户感觉不到它在动 */
-                transform: translateY(-10px); /* 👈 关键修改：此时它还在原位【上方】10px 处，准备最后冲刺 */
+            20% { 
+                opacity: 0.4; /* 👈 关键：早早现身！让用户看到它从上方飘下来的影子 */
+                transform: translateY(-60px); /* 此时已经下落了一段距离 */
             } 
             100% { 
-                opacity: 1; 
-                transform: translateY(0); /* 最终落定在原位 */
+                opacity: 1; /* 慢慢变实 */
+                transform: translateY(0); /* 稳稳落定 */
             } 
         }
 
